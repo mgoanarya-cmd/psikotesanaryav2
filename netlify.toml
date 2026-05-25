@@ -1,0 +1,8 @@
+[build]
+  # Situs ini murni statis (tidak ada langkah build). File HTML disajikan apa adanya.
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  # Functions memakai ESM + driver Neon
+  node_bundler = "esbuild"

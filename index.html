@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Psikotes — Seleksi Kandidat</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--bg2:#111118;--bg3:#1a1a24;--bg4:#22222f;--surface:#1e1e2a;--border:#2a2a3a;--border2:#3a3a50;--accent:#6c63ff;--accent2:#9d97ff;--accent3:#4ade80;--accent4:#f59e0b;--danger:#ef4444;--text:#f0f0f8;--text2:#a0a0b8;--text3:#606078;--font:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;--radius:12px;--radius2:8px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;}
+.page{display:none;min-height:100vh;}.page.active{display:flex;flex-direction:column;}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+#page-landing{align-items:center;justify-content:center;background:radial-gradient(ellipse at 20% 50%,#1a1040 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,#0d2040 0%,transparent 60%),var(--bg);}
+.landing-inner{text-align:center;max-width:600px;padding:2rem;}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border2);padding:6px 16px;border-radius:100px;font-size:12px;color:var(--text2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2.5rem;}
+.logo-dot{width:6px;height:6px;background:var(--accent3);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.landing-title{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:700;line-height:1.1;margin-bottom:1rem;}.landing-title span{color:var(--accent2);}
+.landing-sub{color:var(--text2);font-size:1.05rem;line-height:1.7;margin-bottom:3rem;}
+.btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn{padding:14px 28px;border-radius:var(--radius2);font-family:var(--font);font-size:15px;font-weight:500;cursor:pointer;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary{background:var(--accent);color:#fff;}.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2);}.btn-ghost:hover{border-color:var(--accent);color:var(--accent2);}
+.btn-sm{padding:8px 16px;font-size:13px;}
+#page-register,#page-instructions,#page-hr-login{align-items:center;justify-content:center;padding:2rem;background:var(--bg);}
+.form-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;width:100%;max-width:500px;}
+.form-title{font-size:1.6rem;font-weight:700;margin-bottom:.5rem;}.form-sub{color:var(--text2);font-size:14px;margin-bottom:2rem;}
+.form-group{margin-bottom:1.25rem;}.form-label{display:block;font-size:13px;font-weight:500;color:var(--text2);margin-bottom:6px;}
+.form-input,.form-select{width:100%;padding:11px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);color:var(--text);font-family:var(--font);font-size:14px;transition:border-color .2s;outline:none;}
+.form-input:focus,.form-select:focus{border-color:var(--accent);}.form-select option{background:var(--bg3);}
+.form-divider{height:1px;background:var(--border);margin:1.5rem 0;}
+.back-link{color:var(--text3);font-size:13px;cursor:pointer;margin-top:1rem;display:block;text-align:center;}.back-link:hover{color:var(--accent2);}
+.instr-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;width:100%;max-width:560px;}
+.instr-badge{display:inline-block;background:var(--bg4);border:1px solid var(--border2);padding:4px 12px;border-radius:100px;font-size:11px;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem;}
+.instr-step{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);}.instr-step:last-child{border-bottom:none;}
+.instr-num{width:28px;height:28px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.instr-text strong{display:block;font-size:14px;margin-bottom:3px;}.instr-text span{font-size:13px;color:var(--text2);}
+.warning-box{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:var(--radius2);padding:14px 16px;margin:1.5rem 0;}
+.warning-box p{font-size:13px;color:var(--accent4);line-height:1.6;}
+#page-test{background:var(--bg);}
+.test-header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.test-info{display:flex;align-items:center;gap:16px;}
+.test-badge{background:var(--bg4);border:1px solid var(--border2);padding:5px 12px;border-radius:100px;font-size:12px;color:var(--text2);}
+.test-name{font-weight:600;font-size:15px;}
+.test-timer{font-family:var(--mono);font-size:1.1rem;font-weight:500;color:var(--accent3);background:rgba(74,222,128,.08);padding:8px 16px;border-radius:var(--radius2);border:1px solid rgba(74,222,128,.2);}
+.test-timer.warning{color:var(--accent4);background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25);}
+.test-timer.danger{color:var(--danger);background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.25);}
+.progress-bar-wrap{height:3px;background:var(--border);}.progress-bar{height:3px;background:var(--accent);transition:width .3s;}
+.test-body{max-width:760px;margin:0 auto;padding:2.5rem 1.5rem;}
+.test-section-title{font-size:1.1rem;font-weight:600;margin-bottom:.5rem;}.test-section-sub{font-size:13px;color:var(--text2);margin-bottom:2rem;}
+.question-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;margin-bottom:1.25rem;}
+.q-num{font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:8px;letter-spacing:.06em;}
+.q-text{font-size:15px;line-height:1.65;margin-bottom:1.5rem;font-weight:500;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-option{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);cursor:pointer;transition:all .15s;}
+.q-option:hover{border-color:var(--accent);background:rgba(108,99,255,.08);}.q-option.selected{border-color:var(--accent);background:rgba(108,99,255,.12);}
+.q-opt-key{width:22px;height:22px;background:var(--bg4);border:1px solid var(--border2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;font-family:var(--mono);color:var(--text2);}
+.q-option.selected .q-opt-key{background:var(--accent);color:#fff;border-color:var(--accent);}
+.q-opt-text{font-size:14px;line-height:1.5;padding-top:1px;}
+.likert-wrap{display:flex;gap:8px;flex-wrap:wrap;}
+.likert-btn{flex:1;min-width:60px;padding:10px 8px;text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);cursor:pointer;transition:all .15s;font-size:13px;font-weight:500;color:var(--text2);}
+.likert-btn:hover{border-color:var(--accent);color:var(--accent2);}.likert-btn.selected{border-color:var(--accent);background:rgba(108,99,255,.15);color:var(--accent2);}
+.likert-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:6px;}
+.papi-pair{display:flex;gap:12px;margin-bottom:1.25rem;}
+.papi-choice{flex:1;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .15s;text-align:center;}
+.papi-choice:hover{border-color:var(--accent);}.papi-choice.selected{border-color:var(--accent);background:rgba(108,99,255,.12);}
+.papi-choice-letter{font-size:12px;font-family:var(--mono);color:var(--text3);margin-bottom:8px;}.papi-choice-text{font-size:14px;line-height:1.5;}
+.kraep-container{text-align:center;padding:1rem 0;}
+.kraep-row-display{display:flex;align-items:center;justify-content:center;gap:20px;margin:2rem 0;}
+.kraep-num-box{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:24px 32px;font-family:var(--mono);font-size:3rem;font-weight:600;color:var(--accent2);min-width:100px;}
+.kraep-plus{font-size:2rem;color:var(--text3);}
+.kraep-input{width:120px;height:64px;background:var(--bg3);border:2px solid var(--border2);border-radius:var(--radius);font-family:var(--mono);font-size:2.5rem;font-weight:600;color:var(--text);text-align:center;outline:none;transition:border-color .2s;margin-top:1.5rem;}
+.kraep-input:focus{border-color:var(--accent);}
+.kraep-stats{display:flex;gap:16px;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;}
+.kraep-stat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:10px 20px;text-align:center;}
+.kraep-stat-label{font-size:11px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
+.kraep-stat-val{font-size:1.4rem;font-weight:700;font-family:var(--mono);}
+.test-nav{display:flex;align-items:center;justify-content:space-between;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.q-counter{font-size:13px;color:var(--text3);font-family:var(--mono);}
+#page-waiting{align-items:center;justify-content:center;background:var(--bg);}
+.waiting-inner{text-align:center;padding:3rem;}
+.spinner{width:48px;height:48px;border:3px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 2rem;}
+@keyframes spin{to{transform:rotate(360deg)}}
+#page-hr{background:var(--bg);flex-direction:row;}
+.sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:4px;min-height:100vh;flex-shrink:0;}
+.sidebar-logo{font-size:16px;font-weight:700;padding:.5rem .75rem;margin-bottom:1rem;color:var(--accent2);}.sidebar-logo span{color:var(--text3);font-weight:400;}
+.sidebar-item{padding:9px 12px;border-radius:var(--radius2);cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s;display:flex;align-items:center;gap:10px;}
+.sidebar-item:hover{background:var(--bg3);color:var(--text);}.sidebar-item.active{background:rgba(108,99,255,.15);color:var(--accent2);}
+.sidebar-section{font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;padding:8px 12px 4px;margin-top:8px;}
+.sidebar-spacer{flex:1;}
+.hr-main{flex:1;padding:2rem;overflow-y:auto;}
+.hr-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:10px;}
+.hr-title{font-size:1.5rem;font-weight:700;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:2rem;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;}
+.stat-label{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.stat-value{font-size:2rem;font-weight:700;line-height:1;}.stat-value.green{color:var(--accent3);}.stat-value.red{color:var(--danger);}.stat-value.yellow{color:var(--accent4);}.stat-value.purple{color:var(--accent2);}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.table-toolbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px;}
+.table-title{font-size:15px;font-weight:600;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{padding:6px 14px;border-radius:100px;font-size:12px;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:var(--font);transition:all .15s;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent2);background:rgba(108,99,255,.1);}
+table{width:100%;border-collapse:collapse;}th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);padding:12px 16px;text-align:left;background:var(--bg3);border-bottom:1px solid var(--border);font-weight:500;}
+td{padding:12px 16px;font-size:14px;border-bottom:1px solid var(--border);}tr:last-child td{border-bottom:none;}tr:hover td{background:rgba(108,99,255,.04);}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;}
+.badge-lolos{background:rgba(74,222,128,.12);color:var(--accent3);border:1px solid rgba(74,222,128,.25);}
+.badge-tidak{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.25);}
+.btn-link{background:none;border:none;color:var(--accent2);font-size:13px;cursor:pointer;font-family:var(--font);padding:4px 8px;border-radius:4px;}.btn-link:hover{background:rgba(108,99,255,.1);}
+.detail-panel{background:var(--bg2);border-left:1px solid var(--border);width:430px;min-height:100vh;padding:1.5rem;flex-shrink:0;overflow-y:auto;display:none;}
+.detail-panel.open{display:block;}
+.detail-close{float:right;background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;padding:4px;}
+.detail-name{font-size:1.3rem;font-weight:700;margin-top:.5rem;}.detail-meta{font-size:13px;color:var(--text2);margin-top:4px;}
+.detail-section{margin-top:1.5rem;}.detail-section-title{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:10px;}
+.score-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}.score-label{font-size:12px;color:var(--text2);width:130px;flex-shrink:0;}
+.score-bar-wrap{flex:1;height:6px;background:var(--bg4);border-radius:3px;overflow:hidden;}.score-bar{height:6px;border-radius:3px;transition:width .5s;}
+.score-val{font-size:12px;font-family:var(--mono);width:36px;text-align:right;}
+.result-box{padding:16px;border-radius:var(--radius);margin-top:1rem;text-align:center;}
+.result-lolos{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);}
+.result-tidak{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);}
+.result-text{font-size:1.1rem;font-weight:700;margin-bottom:4px;}
+.result-lolos .result-text{color:var(--accent3);}.result-tidak .result-text{color:var(--danger);}
+.result-sub{font-size:12px;color:var(--text2);}
+.insight-card{background:var(--bg3);border-left:3px solid var(--accent);padding:12px 14px;margin-bottom:10px;border-radius:0 var(--radius2) var(--radius2) 0;}
+.insight-title{font-size:11px;font-weight:700;color:var(--accent2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;}
+.insight-text{font-size:13px;line-height:1.7;color:var(--text2);}
+.dim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+.dim-item{background:var(--bg4);border:1px solid var(--border);border-radius:6px;padding:8px 10px;}
+.dim-name{font-size:11px;color:var(--text3);margin-bottom:3px;}.dim-val{font-size:13px;font-weight:600;}
+.empty-state{text-align:center;padding:4rem 2rem;}.empty-icon{font-size:3rem;margin-bottom:1rem;opacity:.3;}.empty-text{color:var(--text3);font-size:14px;}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius2);padding:14px 20px;font-size:14px;z-index:9999;transform:translateY(100px);opacity:0;transition:all .3s;}
+.toast.show{transform:translateY(0);opacity:1;}.toast.success{border-color:rgba(74,222,128,.4);color:var(--accent3);}.toast.error{border-color:rgba(239,68,68,.4);color:var(--danger);}
+@media(max-width:768px){.sidebar{display:none;}.detail-panel{width:100%;}.stats-grid{grid-template-columns:repeat(2,1fr);}}
+/* Break / jeda antar subtest */
+.break-wrap{max-width:600px;margin:0 auto;padding:3rem 1.5rem;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.break-icon{width:72px;height:72px;border-radius:50%;background:rgba(108,99,255,.12);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.5rem;}
+.break-badge{display:inline-block;background:var(--bg4);border:1px solid var(--border2);padding:4px 14px;border-radius:100px;font-size:11px;color:var(--accent2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem;}
+.break-title{font-size:1.6rem;font-weight:700;margin-bottom:.5rem;}
+.break-sub{color:var(--text2);font-size:14px;line-height:1.7;margin-bottom:1.5rem;max-width:480px;}
+.break-meta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;}
+.break-chip{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:10px 16px;font-size:13px;color:var(--text2);}
+.break-chip strong{color:var(--text);display:block;font-size:15px;margin-top:2px;}
+/* Kraepelin keypad */
+.kraep-done{display:inline-flex;flex-direction:column;align-items:center;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 28px;margin-top:.5rem;}
+.kraep-done-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+.kraep-done-val{font-size:2rem;font-weight:700;font-family:var(--mono);color:var(--accent2);}
+.kraep-keypad{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:420px;margin:1.75rem auto 0;}
+.kraep-key{padding:18px 0;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--mono);font-size:1.6rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .12s;user-select:none;}
+.kraep-key:hover{border-color:var(--accent);background:rgba(108,99,255,.12);color:var(--accent2);}
+.kraep-key:active,.kraep-key.flash{transform:scale(.94);border-color:var(--accent);background:rgba(108,99,255,.25);}
+@media(max-width:520px){.kraep-keypad{grid-template-columns:repeat(5,1fr);gap:7px;}.kraep-key{padding:14px 0;font-size:1.3rem;}}
+</style>
+</head>
+<body>
+
+<div id="page-landing" class="page active">
+  <div class="landing-inner">
+    <div class="logo-badge"><span class="logo-dot"></span>Sistem Seleksi Kandidat</div>
+    <h1 class="landing-title">Portal <span>Psikotes</span><br>Digital</h1>
+    <p class="landing-sub">Platform asesmen psikologi terstandarisasi untuk mendukung proses rekrutmen yang lebih objektif, akurat, dan efisien.</p>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="showPage('register')">▶ Mulai Tes — Kandidat</button>
+      <button class="btn btn-ghost" onclick="showPage('hr-login')">⚙ Masuk sebagai HR</button>
+    </div>
+  </div>
+</div>
+
+<div id="page-register" class="page">
+  <div class="form-card">
+    <div class="form-title">Pendaftaran Kandidat</div>
+    <p class="form-sub">Isi data diri dengan lengkap dan benar sebelum memulai tes.</p>
+    <div class="form-group"><label class="form-label">Nama Lengkap</label><input class="form-input" id="reg-name" type="text" placeholder="Masukkan nama lengkap Anda"></div>
+    <div class="form-group"><label class="form-label">Nomor HP / WhatsApp</label><input class="form-input" id="reg-phone" type="text" placeholder="08xx-xxxx-xxxx"></div>
+    <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="reg-email" type="email" placeholder="email@anda.com"></div>
+    <div class="form-group"><label class="form-label">Posisi yang Dilamar</label>
+      <select class="form-select" id="reg-position">
+        <option value="">— Pilih Posisi —</option>
+      </select></div>
+    <div class="form-divider"></div>
+    <button class="btn btn-primary" style="width:100%" onclick="startRegistration()">Lanjut ke Instruksi →</button>
+    <span class="back-link" onclick="showPage('landing')">← Kembali ke Beranda</span>
+  </div>
+</div>
+
+<div id="page-instructions" class="page">
+  <div class="instr-card">
+    <div class="instr-badge">Sebelum Memulai</div>
+    <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:.5rem">Panduan Pengerjaan Tes</h2>
+    <p style="font-size:14px;color:var(--text2)">Halo, <strong id="instr-name"></strong>! Kamu akan mengerjakan 3 rangkaian tes untuk posisi <strong id="instr-pos"></strong>.</p>
+    <div style="margin:1.5rem 0">
+      <div class="instr-step"><div class="instr-num">1</div><div class="instr-text"><strong>PAPI Kostick — 90 soal (±20 menit)</strong><span>Pilih pernyataan yang paling mencerminkan dirimu dari setiap pasang pilihan. Tidak ada jawaban benar atau salah.</span></div></div>
+      <div class="instr-step"><div class="instr-num">2</div><div class="instr-text"><strong>Tes Kraepelin — 8 menit</strong><span>Jumlahkan dua angka yang tampil, lalu PILIH satu digit satuan dari hasil penjumlahan lewat tombol angka. Kerjakan secepat dan setepat mungkin.</span></div></div>
+      <div class="instr-step"><div class="instr-num">3</div><div class="instr-text"><strong>Integrity Test — 50 soal (±15 menit)</strong><span>Jawab pertanyaan terkait sikap dan etika kerja. Jawablah sejujurnya sesuai kondisi nyata dirimu.</span></div></div>
+    </div>
+    <div class="warning-box"><p>⚠ Jangan menutup atau me-refresh halaman selama tes berlangsung. Pastikan koneksi internetmu stabil. Hasil tes bersifat rahasia dan hanya dapat diakses oleh tim HR.</p></div>
+    <button class="btn btn-primary" style="width:100%;margin-top:.5rem" onclick="startTest()">Mulai Tes Sekarang →</button>
+  </div>
+</div>
+
+<div id="page-test" class="page">
+  <div class="test-header">
+    <div class="test-info"><span class="test-badge" id="th-badge">Tes 1/3</span><span class="test-name" id="th-name">PAPI Kostick</span></div>
+    <div class="test-timer" id="test-timer">00:00</div>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+  <div class="test-body" id="test-body"></div>
+</div>
+
+<div id="page-waiting" class="page">
+  <div class="waiting-inner">
+    <div class="spinner"></div>
+    <h2 style="font-size:1.3rem;margin-bottom:.75rem">Menyimpan Hasil Tes...</h2>
+    <p style="color:var(--text2);font-size:14px">Mohon tunggu sebentar. Data kamu sedang diproses.</p>
+  </div>
+</div>
+
+<div id="page-hr-login" class="page">
+  <div class="form-card">
+    <div class="form-title">HR Dashboard</div>
+    <p class="form-sub">Masukkan kredensial Anda untuk mengakses data hasil tes kandidat.</p>
+    <div class="form-group"><label class="form-label">Username</label><input class="form-input" id="hr-user" type="text" placeholder="Username"></div>
+    <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="hr-pin" type="password" placeholder="••••••" onkeyup="if(event.key==='Enter')hrLogin()"></div>
+    <div class="form-divider"></div>
+    <button class="btn btn-primary" style="width:100%" onclick="hrLogin()">Masuk →</button>
+    <span class="back-link" onclick="showPage('landing')">← Kembali ke Beranda</span>
+  </div>
+</div>
+
+<div id="page-hr" class="page">
+  <div class="sidebar">
+    <div class="sidebar-logo">Psikotes<span> Portal</span></div>
+    <div class="sidebar-section">Menu</div>
+    <div class="sidebar-item active" onclick="hrTab('dashboard',this)">📊 Dashboard</div>
+    <div class="sidebar-item" onclick="hrTab('candidates',this)">👥 Semua Kandidat</div>
+    <div class="sidebar-section">Pengaturan</div>
+    <div class="sidebar-item" onclick="hrTab('divisions',this)">🏷️ Kelola Divisi</div>
+    <div class="sidebar-item" onclick="hrTab('kkm',this)">🎯 Atur KKM</div>
+    <div class="sidebar-item" onclick="hrTab('weights',this)">⚖️ Bobot PAPI</div>
+    <div class="sidebar-item" onclick="hrTab('timer',this)">⏱ Atur Timer</div>
+    <div class="sidebar-item" onclick="hrTab('password',this)">🔑 Ganti Password</div>
+    <div class="sidebar-item" onclick="hrExportAll()">📥 Export JSON</div>
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-item" onclick="hrLogout()" style="color:var(--danger)">✕ Logout</div>
+  </div>
+  <div class="hr-main" id="hr-main-content"></div>
+  <div class="detail-panel" id="detail-panel"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA: PAPI KOSTICK (90 soal)
+// ============================================================
+const PAPI_QUESTIONS = [
+  {a:"Saya suka mengambil inisiatif tanpa menunggu perintah atasan",b:"Saya bekerja paling baik ketika ada arahan yang jelas dari atasan",scaleA:"leadership",scaleB:"conformity"},
+  {a:"Saya nyaman memimpin dan mengarahkan rekan kerja lain",b:"Saya nyaman menjadi anggota tim yang mendukung pemimpin",scaleA:"leadership",scaleB:"follower"},
+  {a:"Saya berani menyampaikan pendapat meski berbeda dengan atasan",b:"Saya senang menyelaraskan diri dengan keputusan tim",scaleA:"leadership",scaleB:"conformity"},
+  {a:"Dalam situasi kritis, saya cenderung tampil mengambil kendali",b:"Dalam situasi kritis, saya mantap mendukung dari belakang",scaleA:"leadership",scaleB:"follower"},
+  {a:"Saya senang ketika diminta memimpin sebuah proyek atau tim",b:"Saya senang berkontribusi sebagai anggota tim yang solid",scaleA:"leadership",scaleB:"conformity"},
+  {a:"Saya peduli pada detail dan akurasi dalam setiap pekerjaan",b:"Saya pandai melihat gambaran besar dari sebuah pekerjaan",scaleA:"detail",scaleB:"conceptual"},
+  {a:"Saya selalu memeriksa ulang pekerjaan sebelum diserahkan",b:"Saya percaya pada penilaian awal dan bergerak cepat dengan yakin",scaleA:"detail",scaleB:"conceptual"},
+  {a:"Saya teliti memastikan tidak ada kesalahan kecil dalam data",b:"Saya fokus memastikan pesan dan tujuan utama tersampaikan",scaleA:"detail",scaleB:"conceptual"},
+  {a:"Saya suka prosedur yang jelas dan terperinci di setiap tahap",b:"Saya suka kebebasan menentukan cara kerja saya sendiri",scaleA:"detail",scaleB:"flexible"},
+  {a:"Saya merasa penting mendokumentasikan setiap langkah pekerjaan",b:"Bagi saya hasil akhir yang nyata adalah yang paling utama",scaleA:"detail",scaleB:"results"},
+  {a:"Saya senang menyelesaikan pekerjaan hingga tuntas sebelum beralih",b:"Saya luwes berpindah tugas mengikuti prioritas yang berkembang",scaleA:"finish",scaleB:"change"},
+  {a:"Saya merasa puas ketika pekerjaan benar-benar tuntas",b:"Saya cekatan memprioritaskan ulang pekerjaan sesuai kebutuhan",scaleA:"finish",scaleB:"adaptable"},
+  {a:"Saya menjaga standar kerja tinggi atas dorongan diri sendiri",b:"Sistem dan pengecekan rutin membantu saya menjaga konsistensi",scaleA:"finish",scaleB:"supervised"},
+  {a:"Menyelesaikan tugas tepat waktu adalah prioritas utama saya",b:"Kualitas hasil kerja adalah prioritas utama saya",scaleA:"finish",scaleB:"quality"},
+  {a:"Saya selalu menyelesaikan apa yang sudah saya mulai",b:"Saya mengutamakan fleksibilitas pada hal yang paling relevan saat ini",scaleA:"finish",scaleB:"change"},
+  {a:"Saya nyaman bekerja dengan tenggat waktu yang ketat",b:"Saya bekerja optimal dalam ritme yang tenang dan terukur",scaleA:"pace",scaleB:"relaxed"},
+  {a:"Saya senang ketika pekerjaan berlangsung cepat dan dinamis",b:"Saya produktif di lingkungan kerja yang tenang dan teratur",scaleA:"pace",scaleB:"stable"},
+  {a:"Saya bisa mengerjakan banyak hal sekaligus dengan baik",b:"Saya efektif ketika fokus pada satu tugas dalam satu waktu",scaleA:"pace",scaleB:"focused"},
+  {a:"Tekanan pekerjaan membuat saya semakin termotivasi",b:"Saya menghasilkan kualitas terbaik dalam suasana yang terkendali",scaleA:"pace",scaleB:"relaxed"},
+  {a:"Saya senang menyelesaikan pekerjaan lebih awal bila memungkinkan",b:"Saya bekerja paling fokus dan optimal mendekati tenggat",scaleA:"pace",scaleB:"procrastinate"},
+  {a:"Saya menikmati berinteraksi dengan banyak orang setiap hari",b:"Saya produktif dan fokus ketika bekerja sendiri",scaleA:"social",scaleB:"independent"},
+  {a:"Saya mudah menjalin hubungan baik dengan orang baru",b:"Saya membangun hubungan secara bertahap dan mendalam",scaleA:"social",scaleB:"reserved"},
+  {a:"Bekerja dalam tim membuat saya lebih bersemangat",b:"Bekerja mandiri membuat saya lebih fokus dan efisien",scaleA:"social",scaleB:"independent"},
+  {a:"Saya senang berbagi ide dan berdiskusi dengan rekan kerja",b:"Saya senang memikirkan ide secara matang sebelum membagikannya",scaleA:"social",scaleB:"reserved"},
+  {a:"Saya aktif membangun jaringan pertemanan di tempat kerja",b:"Saya menjaga batas yang jelas antara urusan profesional dan personal",scaleA:"social",scaleB:"independent"},
+  {a:"Saya mengikuti aturan dan prosedur dengan disiplin tinggi",b:"Saya senang mencari cara baru yang lebih efisien dalam bekerja",scaleA:"conformity",scaleB:"change"},
+  {a:"Saya percaya aturan ada untuk dijalankan dengan konsisten",b:"Saya percaya aturan perlu disesuaikan dengan konteks situasi",scaleA:"conformity",scaleB:"flexible"},
+  {a:"Saya nyaman dengan rutinitas kerja yang sudah terpola baik",b:"Saya menikmati variasi dan tantangan baru dalam pekerjaan",scaleA:"routine",scaleB:"change"},
+  {a:"Saya nyaman bekerja dengan prosedur yang sudah baku",b:"Saya bersemangat ketika ada cara kerja baru untuk dicoba",scaleA:"conformity",scaleB:"change"},
+  {a:"Mengikuti standar perusahaan adalah komitmen penting bagi saya",b:"Standar perusahaan saya pandang sebagai panduan yang fleksibel",scaleA:"conformity",scaleB:"flexible"},
+  {a:"Saya termotivasi oleh target dan pencapaian yang terukur",b:"Saya mengutamakan proses kerja yang baik dan berkualitas",scaleA:"achievement",scaleB:"process"},
+  {a:"Saya senang menetapkan target pribadi di atas standar",b:"Saya berfokus memenuhi standar yang ditetapkan secara konsisten",scaleA:"achievement",scaleB:"conformity"},
+  {a:"Kegagalan mencapai target justru membuat saya semakin termotivasi",b:"Pengalaman membuat saya semakin cermat dan realistis",scaleA:"achievement",scaleB:"stable"},
+  {a:"Saya selalu mencari cara untuk meningkatkan hasil kerja saya",b:"Saya menjaga konsistensi hasil kerja yang sudah baik",scaleA:"achievement",scaleB:"routine"},
+  {a:"Kompetisi yang sehat membuat saya bekerja lebih giat",b:"Kerja sama membuat saya berkembang lebih baik",scaleA:"achievement",scaleB:"social"},
+  {a:"Saya mampu mengendalikan emosi di situasi penuh tekanan",b:"Saya cukup terbuka mengungkapkan perasaan di tempat kerja",scaleA:"restraint",scaleB:"expressive"},
+  {a:"Saya tetap tenang dan terkendali meski situasi menekan",b:"Saya merasa penting mengungkapkan pandangan secara terbuka",scaleA:"restraint",scaleB:"expressive"},
+  {a:"Saya menjaga profesionalisme bahkan dalam kondisi konflik",b:"Saya senang menyelesaikan konflik lewat komunikasi langsung",scaleA:"restraint",scaleB:"expressive"},
+  {a:"Saya berpikir matang sebelum bereaksi pada situasi sulit",b:"Saya merespons situasi secara spontan dan apa adanya",scaleA:"restraint",scaleB:"expressive"},
+  {a:"Stabilitas emosi adalah kunci profesionalisme bagi saya",b:"Keaslian ekspresi emosi membangun kepercayaan di tempat kerja",scaleA:"restraint",scaleB:"expressive"},
+  {a:"Saya senang membantu dan mendukung rekan kerja yang kesulitan",b:"Saya fokus mengemban target dan tanggung jawab saya",scaleA:"nurture",scaleB:"focus"},
+  {a:"Saya puas ketika bisa membantu orang lain berkembang",b:"Saya puas atas setiap pencapaian pribadi yang saya raih",scaleA:"nurture",scaleB:"achievement"},
+  {a:"Saya aktif menawarkan bantuan tanpa harus diminta",b:"Saya bekerja mandiri dan percaya rekan mampu menyelesaikan bagiannya",scaleA:"nurture",scaleB:"independent"},
+  {a:"Membimbing rekan baru adalah hal yang saya nikmati",b:"Saya efektif ketika dapat berkonsentrasi penuh pada tugas saya",scaleA:"nurture",scaleB:"focus"},
+  {a:"Saya peduli terhadap kondisi pribadi rekan kerja saya",b:"Saya menjaga pemisahan yang rapi antara urusan pribadi dan profesional",scaleA:"nurture",scaleB:"restraint"},
+  {a:"Saya sangat terorganisir dan sistematis dalam bekerja",b:"Saya luwes dan spontan dalam mengerjakan tugas",scaleA:"organized",scaleB:"flexible"},
+  {a:"Saya selalu membuat rencana kerja sebelum memulai tugas",b:"Saya senang langsung mulai dan menyesuaikan di tengah jalan",scaleA:"organized",scaleB:"flexible"},
+  {a:"Meja dan file kerja saya selalu rapi dan terstruktur",b:"Saya menilai hasil kerja yang selesai lebih utama dari tampilan",scaleA:"organized",scaleB:"results"},
+  {a:"Saya menggunakan sistem atau tools untuk melacak pekerjaan",b:"Saya mengandalkan ingatan dan intuisi dalam mengelola pekerjaan",scaleA:"organized",scaleB:"flexible"},
+  {a:"Saya bekerja paling baik dengan jadwal dan rencana yang tertata",b:"Saya menikmati perubahan mendadak sebagai tantangan baru",scaleA:"organized",scaleB:"adaptable"},
+  {a:"Saya merasa termotivasi ketika dipuji oleh atasan",b:"Kepuasan saya berasal dari dalam diri sendiri",scaleA:"recognition",scaleB:"intrinsic"},
+  {a:"Penghargaan formal atas hasil kerja penting bagi saya",b:"Kesempatan untuk berkembang lebih berharga bagi saya",scaleA:"recognition",scaleB:"intrinsic"},
+  {a:"Saya bersemangat ketika ada insentif atau reward yang jelas",b:"Saya bekerja keras karena itu adalah standar diri saya",scaleA:"recognition",scaleB:"intrinsic"},
+  {a:"Pengakuan publik atas kontribusi saya sangat memotivasi",b:"Saya puas selama pekerjaan selesai dengan baik",scaleA:"recognition",scaleB:"intrinsic"},
+  {a:"Feedback positif dari atasan menambah semangat kerja saya",b:"Saya cukup mengandalkan evaluasi dari diri sendiri",scaleA:"recognition",scaleB:"intrinsic"},
+  {a:"Saya mudah beradaptasi dengan perubahan mendadak",b:"Saya menyesuaikan diri dengan cermat dan matang terhadap perubahan",scaleA:"adaptable",scaleB:"stable"},
+  {a:"Saya menikmati tantangan yang belum pernah dihadapi",b:"Saya nyaman dan andal dalam situasi yang sudah familiar",scaleA:"adaptable",scaleB:"stable"},
+  {a:"Perubahan kebijakan perusahaan mudah saya terima",b:"Saya memahami perubahan kebijakan secara menyeluruh sebelum menjalankannya",scaleA:"adaptable",scaleB:"stable"},
+  {a:"Ketidakpastian tidak mengganggu fokus kerja saya",b:"Saya bekerja optimal dalam kondisi yang pasti dan terstruktur",scaleA:"adaptable",scaleB:"stable"},
+  {a:"Saya senang mencoba metode atau pendekatan baru dalam bekerja",b:"Saya mempertahankan metode yang sudah terbukti berhasil",scaleA:"adaptable",scaleB:"routine"},
+  {a:"Saya aktif mencari solusi ketika ada masalah di tempat kerja",b:"Saya berkoordinasi dengan atasan untuk memutuskan solusi",scaleA:"initiative",scaleB:"deference"},
+  {a:"Saya senang mengusulkan ide perbaikan tanpa diminta",b:"Saya memastikan selaras dengan arahan sebelum membuat perubahan",scaleA:"initiative",scaleB:"deference"},
+  {a:"Saya berani mengambil keputusan saat atasan tidak ada",b:"Saya memastikan persetujuan atasan untuk keputusan penting",scaleA:"initiative",scaleB:"deference"},
+  {a:"Saya proaktif mengidentifikasi potensi masalah sebelum terjadi",b:"Saya tangkas dan efektif menangani masalah saat muncul",scaleA:"initiative",scaleB:"reactive"},
+  {a:"Saya memulai pekerjaan yang jelas perlu dilakukan tanpa menunggu",b:"Saya memastikan mendapat instruksi yang jelas sebelum memulai",scaleA:"initiative",scaleB:"deference"},
+  {a:"Saya suka memikirkan ide-ide besar dan inovatif",b:"Saya suka menganalisis data dan fakta secara mendalam",scaleA:"conceptual",scaleB:"analytical"},
+  {a:"Saya mudah melihat peluang yang belum terpikirkan orang lain",b:"Saya andal mengoptimalkan apa yang sudah ada",scaleA:"conceptual",scaleB:"analytical"},
+  {a:"Brainstorming dan diskusi kreatif adalah kekuatan saya",b:"Analisis mendalam dan riset sistematis adalah kekuatan saya",scaleA:"conceptual",scaleB:"analytical"},
+  {a:"Saya tertarik pada teori dan konsep baru dalam pekerjaan",b:"Saya tertarik pada penerapan praktis yang sudah terbukti",scaleA:"conceptual",scaleB:"practical"},
+  {a:"Visi jangka panjang sangat menggerakkan semangat saya",b:"Menyelesaikan tugas harian dengan baik sangat memuaskan bagi saya",scaleA:"conceptual",scaleB:"finish"},
+  {a:"Saya senang memiliki kejelasan peran dan tanggung jawab",b:"Saya nyaman di lingkungan dinamis dengan peran yang fleksibel",scaleA:"structure",scaleB:"adaptable"},
+  {a:"Job description yang jelas mendukung produktivitas saya",b:"Saya bekerja efektif meski peran tidak didefinisikan ketat",scaleA:"structure",scaleB:"flexible"},
+  {a:"Saya senang memiliki kepastian tentang harapan dan standar kinerja",b:"Saya nyaman dengan ekspektasi yang berkembang seiring waktu",scaleA:"structure",scaleB:"adaptable"},
+  {a:"Lingkungan kerja yang terstruktur meningkatkan produktivitas saya",b:"Kebebasan berkreasi meningkatkan produktivitas saya",scaleA:"structure",scaleB:"change"},
+  {a:"Saya senang dengan instruksi yang detail dan spesifik",b:"Saya senang instruksi umum dengan kebebasan mengeksekusi",scaleA:"structure",scaleB:"initiative"},
+  {a:"Saya peka terhadap kondisi emosional rekan dalam tim",b:"Saya fokus pada penyelesaian tugas dan target tim",scaleA:"nurture",scaleB:"focus"},
+  {a:"Saya mudah merasakan ketika rekan sedang menghadapi tekanan",b:"Saya berfokus pada output kerja yang ingin dicapai",scaleA:"nurture",scaleB:"achievement"},
+  {a:"Hubungan baik dengan rekan kerja mendukung produktivitas saya",b:"Kualitas hasil kerja adalah hal yang utama bagi saya",scaleA:"social",scaleB:"achievement"},
+  {a:"Saya meluangkan waktu mendengarkan rekan kerja",b:"Saya mendorong rekan untuk mandiri menyelesaikan masalahnya",scaleA:"nurture",scaleB:"focus"},
+  {a:"Lingkungan kerja yang harmonis mendukung semangat kerja saya",b:"Saya tetap produktif dan tenang meski lingkungan penuh dinamika",scaleA:"social",scaleB:"restraint"},
+  {a:"Saya gigih bertahan meski menghadapi hambatan besar",b:"Saya bijak mengalihkan energi ke peluang lain saat satu jalan buntu",scaleA:"finish",scaleB:"change"},
+  {a:"Saya terus mencoba pendekatan berbeda sampai masalah terpecahkan",b:"Saya tahu kapan harus beralih ke solusi alternatif",scaleA:"achievement",scaleB:"adaptable"},
+  {a:"Keteguhan dan ketekunan adalah nilai utama dalam kerja saya",b:"Fleksibilitas dan kecepatan beradaptasi adalah kekuatan saya",scaleA:"finish",scaleB:"adaptable"},
+  {a:"Saya berkomitmen penuh pada tugas yang sudah saya ambil",b:"Saya siap menyesuaikan tugas demi prioritas yang lebih penting",scaleA:"finish",scaleB:"change"},
+  {a:"Saya terdorong kuat untuk menuntaskan pekerjaan yang belum selesai",b:"Saya berlapang dada menerima bahwa prioritas dapat bergeser",scaleA:"finish",scaleB:"relaxed"},
+  {a:"Saya senang mencatat dan mendokumentasikan hal-hal penting",b:"Saya mengandalkan komunikasi lisan yang cair dengan rekan",scaleA:"organized",scaleB:"social"},
+  {a:"Saya terdorong segera menyelesaikan pekerjaan yang tertunda",b:"Saya tetap tenang mengelola antrean pekerjaan tanpa terbebani",scaleA:"finish",scaleB:"relaxed"},
+  {a:"Saya sangat menghargai ketepatan waktu dalam segala hal",b:"Saya menghargai kualitas meski memerlukan waktu lebih",scaleA:"pace",scaleB:"quality"},
+  {a:"Saya senang mengatur dan mengkoordinasikan kegiatan tim",b:"Saya senang berkontribusi secara individual dalam tim",scaleA:"leadership",scaleB:"independent"},
+  {a:"Saya merasa bertanggung jawab atas keberhasilan tim secara keseluruhan",b:"Saya fokus mengemban tanggung jawab dan kontribusi pribadi saya",scaleA:"leadership",scaleB:"focus"},
+  {a:"Saya berinisiatif membantu anggota tim yang tertinggal",b:"Saya menuntaskan tugas saya sendiri dengan optimal terlebih dahulu",scaleA:"nurture",scaleB:"focus"}
+];
+
+// ============================================================
+// DATA: INTEGRITY TEST (50 soal)
+// ============================================================
+const INTEGRITY_QUESTIONS = [
+  {section:"A",type:"choice",text:"Seorang kasir menemukan kelebihan uang Rp 50.000 di laci kasnya di akhir shift. Tindakan yang paling tepat adalah...",options:["Langsung laporkan ke atasan hari itu juga","Simpan dulu, tunggu apakah ada yang complain besok","Anggap saja sebagai rejeki tak terduga","Bingung, tergantung situasi yang ada"],scores:[4,2,0,1]},
+  {section:"A",type:"choice",text:"Menurutmu, seberapa umum karyawan mengambil keuntungan kecil dari perusahaan untuk keperluan pribadi?",options:["Sangat umum dan bisa dimaklumi","Umum, tapi seharusnya tidak terjadi","Jarang sekali terjadi","Hampir tidak pernah terjadi"],scores:[0,2,3,4]},
+  {section:"A",type:"choice",text:"Kamu melihat rekan kerja mengambil uang dari kas kecil tanpa izin. Apa yang kamu lakukan?",options:["Langsung lapor ke atasan hari itu","Tegur rekan tersebut secara pribadi dulu","Diam saja, bukan urusan saya","Lihat dulu seberapa sering dia melakukannya"],scores:[4,3,0,1]},
+  {section:"A",type:"choice",text:"Kamu mengetahui rekan satu tim memalsukan laporan harian kecil agar target terlihat tercapai. Kamu...",options:["Langsung laporkan ke atasan dengan bukti","Bicara berdua dengan rekan tersebut dulu","Diam karena tidak ingin merusak hubungan tim","Ikut-ikutan jika hasilnya menguntungkan tim"],scores:[4,3,0,0]},
+  {section:"A",type:"choice",text:"Perusahaan memberikan tunjangan transport harian. Kamu tidak masuk kerja tapi lupa tidak melaporkannya. Kamu...",options:["Langsung lapor ke HRD dan kembalikan tunjangan hari itu","Potong sendiri di slip bulan depan tanpa melapor","Anggap tidak ada karena nominal kecil","Tunggu sampai HRD menanyakannya"],scores:[4,3,1,0]},
+  {section:"A",type:"choice",text:"Vendor menawarkan hadiah pribadi kepadamu jika kamu merekomendasikan mereka ke perusahaan. Kamu...",options:["Tolak tegas dan laporkan ke atasan","Tolak tapi tidak melaporkan karena tidak ingin ribut","Terima tapi tetap memilih vendor terbaik secara objektif","Terima dan rekomendasikan vendor tersebut"],scores:[4,3,1,0]},
+  {section:"A",type:"choice",text:"Kamu menemukan kolega yang menggunakan akun perusahaan untuk keperluan pribadi secara reguler. Kamu...",options:["Laporkan ke atasan dengan bukti yang ada","Ingatkan langsung dan minta dihentikan","Diam karena takut dianggap tukang lapor","Anggap wajar selama tidak ketahuan manajemen"],scores:[4,3,0,0]},
+  {section:"A",type:"choice",text:"Kamu diminta menandatangani dokumen yang datanya kamu tahu tidak akurat. Kamu...",options:["Tolak dan minta data diperbaiki dulu","Tandatangani tapi beri catatan keberatan tertulis","Tandatangani karena disuruh atasan","Tandatangani tanpa pertanyaan"],scores:[4,3,1,0]},
+  {section:"A",type:"likert",text:"Mengambil keuntungan kecil dari perusahaan adalah hal yang bisa dimaklumi selama tidak ketahuan.",reverse:true},
+  {section:"A",type:"likert",text:"Melaporkan pelanggaran rekan kerja ke atasan adalah tindakan yang benar meskipun berisiko merusak pertemanan.",reverse:false},
+  {section:"A",type:"likert",text:"Kejujuran kepada perusahaan harus dipertahankan bahkan jika merugikan diri sendiri secara jangka pendek.",reverse:false},
+  {section:"A",type:"likert",text:"Berbohong kecil di tempat kerja adalah hal yang normal dan tidak merugikan siapapun.",reverse:true},
+  {section:"A",type:"likert",text:"Karyawan yang jujur dan berintegritas pada akhirnya akan lebih dihargai perusahaan.",reverse:false},
+  {section:"A",type:"likert",text:"Jika semua orang melakukannya, maka tindakan tersebut tidak bisa disebut pelanggaran.",reverse:true},
+  {section:"A",type:"likert",text:"Transparansi dalam pelaporan kerja lebih penting daripada membuat angka terlihat bagus.",reverse:false},
+  {section:"A",type:"likert",text:"Kepercayaan perusahaan kepada karyawan adalah aset yang harus dijaga dengan sungguh-sungguh.",reverse:false},
+  {section:"B",type:"choice",text:"Pernahkah kamu datang terlambat ke tempat kerja lalu memberikan alasan yang tidak sepenuhnya benar kepada atasan?",options:["Tidak pernah sama sekali","Pernah 1-2 kali dalam hidup","Beberapa kali pernah melakukannya","Cukup sering melakukan itu"],scores:[2,3,2,0]},
+  {section:"B",type:"choice",text:"Pernahkah kamu menggunakan barang atau fasilitas milik tempat kerja sebelumnya untuk keperluan pribadi tanpa izin?",options:["Tidak pernah sama sekali","Pernah sekali, barang yang sangat kecil nilainya","Beberapa kali pernah","Cukup sering dan sudah terbiasa"],scores:[3,2,1,0]},
+  {section:"B",type:"choice",text:"Pernahkah kamu melaporkan sesuatu yang tidak sepenuhnya akurat karena takut mendapat penilaian buruk?",options:["Tidak pernah","Pernah sekali karena situasi darurat","Beberapa kali pernah","Sering melakukannya"],scores:[3,2,1,0]},
+  {section:"B",type:"choice",text:"Pernahkah kamu mengklaim kredit atas pekerjaan yang sebenarnya dikerjakan bersama atau oleh orang lain?",options:["Tidak pernah","Pernah sekali tanpa sengaja","Beberapa kali terjadi","Sering, ini hal yang wajar"],scores:[3,2,1,0]},
+  {section:"B",type:"likert",text:"Saya pernah melakukan sesuatu yang bertentangan dengan aturan tempat kerja yang saya tahu salah.",reverse:true},
+  {section:"B",type:"likert",text:"Saya selalu jujur dalam setiap laporan yang saya buat meskipun hasilnya tidak memuaskan.",reverse:false},
+  {section:"B",type:"likert",text:"Saya pernah menyembunyikan informasi penting dari atasan karena takut dengan konsekuensinya.",reverse:true},
+  {section:"B",type:"likert",text:"Saya bangga bahwa saya bisa dipercaya oleh atasan dan rekan kerja saya.",reverse:false},
+  {section:"C",type:"choice",text:"Ketika diberi tugas dan tidak ada atasan yang mengawasi, kamu biasanya...",options:["Tetap mengerjakan sepenuh hati seperti biasa","Mengerjakan secukupnya saja","Menunda hingga ada yang mengingatkan","Fokus ke hal lain yang lebih menarik"],scores:[4,2,1,0]},
+  {section:"C",type:"choice",text:"Deadline pekerjaanmu besok, tapi malam ini ada acara seru bersama teman. Kamu...",options:["Selesaikan pekerjaan dulu baru pergi","Pergi sebentar, pulang lebih awal untuk kerja","Pergi, besok pagi diselesaikan seadanya","Pergi saja, nanti cari alasan ke atasan"],scores:[4,3,1,0]},
+  {section:"C",type:"choice",text:"Atasan memberikan instruksi yang menurutmu kurang efisien. Kamu...",options:["Ikuti dulu, sampaikan masukan secara baik-baik","Diam-diam kerjakan dengan cara sendiri yang lebih efisien","Protes langsung di depan rekan kerja lain","Abaikan instruksinya dan lakukan sesuai keinginan"],scores:[4,2,0,0]},
+  {section:"C",type:"choice",text:"Kamu menyadari kamu membuat kesalahan yang berdampak pada pekerjaan tim. Kamu...",options:["Langsung akui dan lapor ke atasan disertai solusi","Diam-diam perbaiki sendiri tanpa memberitahu siapapun","Tunggu sampai ada yang menyadarinya","Cari cara untuk mengalihkan tanggung jawab"],scores:[4,2,1,0]},
+  {section:"C",type:"choice",text:"Kamu selesai lebih awal dari jadwal. Sisa waktu kerja kamu gunakan untuk...",options:["Membantu rekan atau mengerjakan pekerjaan tambahan","Belajar hal baru yang relevan dengan pekerjaan","Istirahat atau melakukan hal pribadi","Pura-pura sibuk agar tidak diberi tugas tambahan"],scores:[4,3,2,0]},
+  {section:"C",type:"likert",text:"Saya selalu memberikan usaha terbaik meskipun tidak ada yang melihat atau menilai.",reverse:false},
+  {section:"C",type:"likert",text:"Tanggung jawab pekerjaan adalah komitmen yang tidak boleh dikompromikan.",reverse:false},
+  {section:"C",type:"likert",text:"Saya merasa tidak masalah melewatkan beberapa langkah prosedur jika hasilnya sama saja.",reverse:true},
+  {section:"C",type:"likert",text:"Kualitas kerja saya tidak berubah meskipun dalam kondisi lelah atau tertekan.",reverse:false},
+  {section:"C",type:"likert",text:"Saya bertanggung jawab penuh atas setiap pekerjaan yang saya ambil alih.",reverse:false},
+  {section:"D",type:"likert",text:"Aturan perusahaan kadang perlu dilanggar demi efisiensi yang lebih baik.",reverse:true},
+  {section:"D",type:"likert",text:"Orang yang melaporkan rekan kerjanya ke atasan atas pelanggaran adalah pengkhianat tim.",reverse:true},
+  {section:"D",type:"likert",text:"Saya percaya aturan ada untuk menciptakan ketertiban yang menguntungkan semua pihak.",reverse:false},
+  {section:"D",type:"likert",text:"Jika tidak merugikan orang lain secara langsung, mengambil jalan pintas adalah hal yang wajar.",reverse:true},
+  {section:"D",type:"likert",text:"Integritas adalah nilai yang tidak bisa dikompromikan meski dalam tekanan sekalipun.",reverse:false},
+  {section:"D",type:"likert",text:"Loyalitas kepada teman lebih penting daripada kepatuhan terhadap aturan perusahaan.",reverse:true},
+  {section:"D",type:"likert",text:"Sanksi yang konsisten adalah cara terbaik untuk menjaga budaya integritas di tempat kerja.",reverse:false},
+  {section:"D",type:"likert",text:"Saya tidak akan melakukan sesuatu yang melanggar aturan meskipun tidak akan pernah ketahuan.",reverse:false},
+  {section:"E",type:"choice",text:"Kamu adalah driver perusahaan. Setelah mengantar, masih ada sisa BBM di kartu perusahaan. Tidak ada yang mengawasi. Kamu...",options:["Tidak isi BBM pribadi, kembali ke kantor dan laporkan sisa saldo","Isi sedikit untuk motor pribadi, toh sisanya banyak","Isi penuh untuk motor pribadi sekalian","Tanya teman driver lain, biasanya bagaimana mereka lakukan"],scores:[4,0,0,1]},
+  {section:"E",type:"choice",text:"Kamu inventory man dan menemukan selisih stok kecil yang tidak tercatat. Kamu...",options:["Langsung laporkan dan minta bantuan audit internal","Catat sendiri dan diam-diam cari tahu penyebabnya","Tutup selisihnya dengan stok lain agar laporan tampak rapi","Abaikan dulu, nanti ketahuan sendiri"],scores:[4,2,0,1]},
+  {section:"E",type:"choice",text:"Rekan kerjamu minta tolong kamu absenkan dia karena dia terlambat. Kamu...",options:["Tolak dengan tegas meskipun dia marah","Tolak tapi bantu carikan solusi lain","Lakukan sekali, tapi minta dia tidak mengulangi","Lakukan, toh kamu juga pernah dibantu dia"],scores:[4,3,1,0]},
+  {section:"E",type:"choice",text:"Kamu kasir dan mendapati ada transaksi yang tidak sesuai pada akhir hari. Kamu...",options:["Langsung laporkan ke supervisor meski belum tahu penyebabnya","Coba selesaikan dulu sendiri agar tidak terlihat ada masalah","Tutup-tutupi selisih dengan uang sendiri agar laporan bersih","Tunggu sampai besok, mungkin hanya kekeliruan input"],scores:[4,2,0,1]},
+  {section:"E",type:"choice",text:"Kamu telemarketing dan tahu produk yang dijual tidak sepenuhnya sesuai janji marketing. Kamu...",options:["Laporkan ke supervisor dan minta klarifikasi sebelum berjualan","Tetap jual tapi sampaikan informasi sejujurnya kepada pelanggan","Ikuti script marketing meski kamu tahu ada yang tidak akurat","Jual dengan cara apapun karena target adalah prioritas"],scores:[4,3,1,0]},
+  {section:"E",type:"choice",text:"Kamu menemukan data pelanggan perusahaan. Rekan dari perusahaan lain meminta datanya dengan imbalan finansial. Kamu...",options:["Tolak tegas dan laporkan ke atasan segera","Tolak tapi tidak melaporkan karena sudah diselesaikan","Pertimbangkan karena nominalnya besar","Berikan dengan syarat identitasmu tidak disebutkan"],scores:[4,3,0,0]},
+  {section:"E",type:"choice",text:"Rekan sesama kasir selalu meminjam uang receh dari laci kasnya dan menggantinya keesokan harinya. Kamu...",options:["Laporkan ke supervisor karena ini pelanggaran prosedur","Ingatkan langsung bahwa perilaku itu berisiko dan harus dihentikan","Diam karena dia selalu menggantinya dan tidak ada rugi","Ikut melakukan hal yang sama karena ternyata aman"],scores:[4,3,0,0]},
+  {section:"E",type:"choice",text:"Atasan memintamu untuk tidak mencatat suatu pengeluaran operasional agar anggaran terlihat efisien di laporan. Kamu...",options:["Tolak dan jelaskan risiko etika dan legalitasnya","Ikuti tapi dokumentasikan permintaan itu secara pribadi","Ikuti karena atasan yang bertanggung jawab","Ikuti tanpa pertanyaan karena itu perintah"],scores:[4,3,1,0]}
+];
+
+// ============================================================
+// DATA: KKM, WEIGHTS, LABELS
+// ============================================================
+const TIMER_DEFAULT = {papi:1800,kraepelin:480,integrity:900};
+let TIMER_CONFIG = {...TIMER_DEFAULT};
+
+const KKM_DEFAULT = {
+  "Cashier":       {papi:55,kraepelin:60,integrity:65,total:62},
+  "Driver":        {papi:50,kraepelin:55,integrity:68,total:60},
+  "Inventory Man": {papi:55,kraepelin:65,integrity:65,total:63},
+  "Telemarketing": {papi:60,kraepelin:50,integrity:60,total:60}
+};
+let KKM = JSON.parse(JSON.stringify(KKM_DEFAULT));
+const PAPI_WEIGHTS_DEFAULT = {
+  "Cashier":       {detail:2.5,conformity:2,restraint:2,organized:2,finish:1.5,structure:1},
+  "Driver":        {conformity:2.5,restraint:2.5,finish:2,adaptable:1.5,structure:1},
+  "Inventory Man": {detail:3,organized:3,conformity:2,finish:2,structure:1.5},
+  "Telemarketing": {social:3,achievement:2.5,leadership:2,nurture:1.5,recognition:1,adaptable:1}
+};
+// Bobot per dimensi per divisi — dimuat & disimpan ke database online
+let PAPI_WEIGHTS = JSON.parse(JSON.stringify(PAPI_WEIGHTS_DEFAULT));
+
+// ============================================================
+// DATA: DIVISI / POSISI (DINAMIS) — disimpan di database online
+// ============================================================
+const DIVISIONS_DEFAULT = ["Cashier","Driver","Inventory Man","Telemarketing"];
+let DIVISIONS = [...DIVISIONS_DEFAULT];
+
+// Tampilan (ikon & warna) per divisi. Default untuk 4 divisi awal.
+const DIVISION_META_DEFAULT = {
+  "Cashier":      {icon:"💰",bg:"rgba(24,95,165,.12)", border:"rgba(24,95,165,.35)", text:"#185FA5"},
+  "Driver":       {icon:"🚗",bg:"rgba(15,110,86,.12)", border:"rgba(15,110,86,.35)", text:"#0F6E56"},
+  "Inventory Man":{icon:"📦",bg:"rgba(133,79,11,.12)", border:"rgba(133,79,11,.35)", text:"#854F0B"},
+  "Telemarketing":{icon:"📞",bg:"rgba(153,53,86,.12)", border:"rgba(153,53,86,.35)", text:"#993556"}
+};
+let DIVISION_META = JSON.parse(JSON.stringify(DIVISION_META_DEFAULT));
+// Palet warna untuk divisi baru
+const DIVISION_PALETTE = [
+  {icon:"🏷️",bg:"rgba(108,99,255,.12)", border:"rgba(108,99,255,.35)", text:"#9d97ff"},
+  {icon:"🛠️",bg:"rgba(217,119,6,.12)",  border:"rgba(217,119,6,.35)",  text:"#d97706"},
+  {icon:"🧰",bg:"rgba(13,148,136,.12)",  border:"rgba(13,148,136,.35)",  text:"#0d9488"},
+  {icon:"📈",bg:"rgba(190,24,93,.12)",   border:"rgba(190,24,93,.35)",   text:"#be185d"},
+  {icon:"🧪",bg:"rgba(79,70,229,.12)",   border:"rgba(79,70,229,.35)",   text:"#6366f1"},
+  {icon:"🏢",bg:"rgba(2,132,199,.12)",   border:"rgba(2,132,199,.35)",   text:"#0284c7"},
+  {icon:"🚀",bg:"rgba(220,38,38,.12)",   border:"rgba(220,38,38,.35)",   text:"#dc2626"},
+  {icon:"🌐",bg:"rgba(22,163,74,.12)",   border:"rgba(22,163,74,.35)",   text:"#16a34a"}
+];
+function divMeta(pos){
+  if(DIVISION_META[pos]) return DIVISION_META[pos];
+  // fallback deterministik untuk divisi yang belum punya meta
+  let h=0; for(const c of pos) h=(h*31+c.charCodeAt(0))>>>0;
+  return DIVISION_PALETTE[h%DIVISION_PALETTE.length];
+}
+
+// Default KKM & bobot — gabungan default bawaan + default divisi baru (dimuat dari DB online)
+let DIV_KKM_DEFAULT = JSON.parse(JSON.stringify(KKM_DEFAULT));
+let DIV_W_DEFAULT   = JSON.parse(JSON.stringify(PAPI_WEIGHTS_DEFAULT));
+const GENERIC_KKM_DEFAULT = {papi:55,kraepelin:55,integrity:60,total:60};
+function getKkmDefault(pos){ return DIV_KKM_DEFAULT[pos] ? {...DIV_KKM_DEFAULT[pos]} : {...GENERIC_KKM_DEFAULT}; }
+function getWeightDefault(pos){ return DIV_W_DEFAULT[pos] ? {...DIV_W_DEFAULT[pos]} : {}; }
+
+// Pastikan setiap divisi punya entri KKM, bobot, dan meta (mis. dari sesi lalu)
+function ensureDivisionData(){
+  DIVISIONS.forEach(pos=>{
+    if(!KKM[pos]) KKM[pos]=getKkmDefault(pos);
+    if(!PAPI_WEIGHTS[pos]) PAPI_WEIGHTS[pos]=getWeightDefault(pos);
+    if(!DIVISION_META[pos]) DIVISION_META[pos]=divMeta(pos);
+  });
+}
+// ============================================================
+// API CLIENT — semua data tersimpan di database online (Netlify DB)
+// ============================================================
+function authHeaders(){
+  const t=sessionStorage.getItem("hr_token");
+  return Object.assign({"content-type":"application/json"}, t?{"Authorization":"Bearer "+t}:{});
+}
+async function apiGet(path,auth){
+  const res=await fetch(path,{headers:auth?authHeaders():{}});
+  if(!res.ok)throw new Error("GET "+path+" → "+res.status);
+  return res.json();
+}
+async function apiSend(method,path,body,auth){
+  const res=await fetch(path,{method,headers:auth?authHeaders():{"content-type":"application/json"},body:JSON.stringify(body)});
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok){const e=new Error(data.error||method+" "+path+" → "+res.status);e.status=res.status;e.data=data;throw e;}
+  return data;
+}
+
+// Muat seluruh konfigurasi dari DB ke variabel in-memory.
+async function loadConfig(){
+  const c=await apiGet("/api/config",false);
+  if(c.timer)TIMER_CONFIG=c.timer;
+  if(c.kkm)KKM=c.kkm;
+  if(c.papi_weights)PAPI_WEIGHTS=c.papi_weights;
+  if(c.divisions)DIVISIONS=c.divisions;
+  if(c.division_meta)DIVISION_META=c.division_meta;
+  if(c.div_kkm_default)DIV_KKM_DEFAULT=c.div_kkm_default;
+  if(c.div_w_default)DIV_W_DEFAULT=c.div_w_default;
+  ensureDivisionData();
+}
+
+// Simpan sebagian konfigurasi ke DB (butuh login HR).
+async function saveConfig(partial){ return apiSend("PUT","/api/config",partial,true); }
+
+// Persist data divisi (dipakai saat tambah/hapus divisi)
+async function persistDivisions(){
+  await saveConfig({
+    divisions:DIVISIONS, division_meta:DIVISION_META,
+    div_kkm_default:DIV_KKM_DEFAULT, div_w_default:DIV_W_DEFAULT,
+    kkm:KKM, papi_weights:PAPI_WEIGHTS
+  });
+}
+function populateDivisionDropdown(){
+  const sel=document.getElementById("reg-position");
+  if(!sel)return;
+  const cur=sel.value;
+  sel.innerHTML='<option value="">— Pilih Posisi —</option>'+DIVISIONS.map(d=>'<option value="'+d+'">'+d+'</option>').join("");
+  if(cur&&DIVISIONS.includes(cur))sel.value=cur;
+}
+// Berapa kali tiap dimensi BISA dipilih (jumlah soal yang memuatnya di sisi A atau B).
+// Dipakai untuk normalisasi skor yang benar + ditampilkan ke HR sebagai "cakupan soal".
+const PAPI_DIM_MAX = (()=>{const m={};PAPI_QUESTIONS.forEach(q=>{m[q.scaleA]=(m[q.scaleA]||0)+1;m[q.scaleB]=(m[q.scaleB]||0)+1;});return m;})();
+const PAPI_DIM_LABELS = {
+  leadership:"Kepemimpinan",conformity:"Kepatuhan Aturan",detail:"Orientasi Detail",
+  conceptual:"Pemikiran Konseptual",finish:"Ketuntasan Kerja",change:"Orientasi Perubahan",
+  pace:"Kecepatan Kerja",relaxed:"Ketenangan",social:"Orientasi Sosial",
+  independent:"Kemandirian",organized:"Keteraturan",flexible:"Fleksibilitas",
+  achievement:"Orientasi Prestasi",restraint:"Pengendalian Emosi",nurture:"Kepedulian",
+  recognition:"Kebutuhan Pengakuan",intrinsic:"Motivasi Internal",adaptable:"Adaptabilitas",
+  stable:"Stabilitas",initiative:"Inisiatif",structure:"Kebutuhan Struktur",
+  follower:"Orientasi Pengikut",focus:"Fokus Tugas",routine:"Orientasi Rutinitas",
+  deference:"Kepatuhan Hierarki",analytical:"Kemampuan Analitis",results:"Orientasi Hasil",
+  reserved:"Pendiam / Reflektif",quality:"Orientasi Kualitas",supervised:"Butuh Pengawasan",
+  reactive:"Reaktif",procrastinate:"Menunda",process:"Orientasi Proses",
+  practical:"Praktis",focused:"Fokus Tunggal",expressive:"Ekspresif Emosi"
+};
+
+// ============================================================
+// APP STATE
+// ============================================================
+let candidate = {}, testState = {phase:0,answers:{papi:{},kraepelin:{},integrity:{}},timerInterval:null,timeLeft:0};
+let kraepData = {nums:[],idx:0,correct:0,total:0,streak:0,log:[]};
+let papiIdx=0, intIdx=0, currentFilter="all", currentDetailList=[];
+
+// ============================================================
+// UTILS
+// ============================================================
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById("page-"+id).classList.add("active");}
+function showToast(msg,type="success"){const t=document.getElementById("toast");t.textContent=msg;t.className="toast show "+type;setTimeout(()=>t.className="toast",3500);}
+// Hasil kandidat di-cache di memori; sumber kebenaran ada di database online.
+let RESULTS_CACHE=[];
+function getResults(){return RESULTS_CACHE;}
+async function refreshResults(){RESULTS_CACHE=await apiGet("/api/results",true);return RESULTS_CACHE;}
+async function saveResult(r){return apiSend("POST","/api/results",r,false);}
+async function putResults(arr){RESULTS_CACHE=arr;return apiSend("PUT","/api/results",arr,true);}
+function updateProgress(cur,tot){const p=document.getElementById("progress-bar");if(p)p.style.width=Math.round((cur/tot)*100)+"%";}
+function startTimer(sec,cb){testState.timeLeft=sec;renderTimer();testState.timerInterval=setInterval(()=>{testState.timeLeft--;renderTimer();if(testState.timeLeft<=0){clearInterval(testState.timerInterval);cb();}},1000);}
+function renderTimer(){const t=testState.timeLeft,el=document.getElementById("test-timer");if(!el)return;const m=String(Math.floor(t/60)).padStart(2,"0"),s=String(t%60).padStart(2,"0");el.textContent=m+":"+s;el.className="test-timer"+(t<60?" danger":t<120?" warning":"");}
+
+// ============================================================
+// REGISTER
+// ============================================================
+function startRegistration(){
+  const name=document.getElementById("reg-name").value.trim();
+  const phone=document.getElementById("reg-phone").value.trim();
+  const email=document.getElementById("reg-email").value.trim();
+  const position=document.getElementById("reg-position").value;
+  if(!name||!phone||!email||!position){showToast("Lengkapi semua data terlebih dahulu","error");return;}
+  // Pengecekan duplikat email/HP kini dilakukan di server saat hasil dikirim.
+  candidate={name,phone,email,position,id:"KD-"+Date.now().toString(36).toUpperCase(),startTime:new Date().toISOString()};
+  document.getElementById("instr-name").textContent=name;
+  document.getElementById("instr-pos").textContent=position;
+  showPage("instructions");
+}
+
+// ============================================================
+// TEST FLOW
+// ============================================================
+function startTest(){testState={phase:0,answers:{papi:{},kraepelin:{},integrity:{}},timerInterval:null,timeLeft:0};showPage("test");runPhase(0);}
+function runPhase(p){testState.phase=p;clearInterval(testState.timerInterval);if(p===0||p===1||p===2)showBreak(p);else finishTest();}
+function advancePhase(){runPhase(testState.phase+1);}
+
+// Halaman jeda sebelum tiap subtest. Timer baru berjalan setelah "Lanjutkan Tes".
+const BREAK_META=[
+  {badge:"Tes 1 dari 3",name:"PAPI Kostick",icon:"🧠",
+   sub:"Pilih satu dari dua pernyataan yang <strong>paling mencerminkan diri Anda</strong>. Kedua pilihan sama-sama positif — tidak ada jawaban benar atau salah, jawab sejujurnya.",
+   chips:[["Jumlah Soal",PAPI_QUESTIONS.length+" soal"],["Estimasi","±20 menit"],["Tipe","Forced-choice"]]},
+  {badge:"Tes 2 dari 3",name:"Tes Kraepelin",icon:"⚡",
+   sub:"Jumlahkan dua angka yang muncul, lalu <strong>pilih digit satuannya</strong> lewat tombol angka. Kerjakan secepat dan setepat mungkin. Istirahatkan mata sejenak sebelum mulai.",
+   chips:[["Cara Jawab","Tombol 0–9"],["Tujuan","Ketelitian & fokus"],["Contoh","7 + 8 → 5"]]},
+  {badge:"Tes 3 dari 3",name:"Integrity Test",icon:"🛡️",
+   sub:"Jawab pertanyaan seputar sikap dan etika kerja <strong>sejujurnya</strong> sesuai kondisi nyata diri Anda. Ini bagian terakhir — tarik napas dulu, lalu lanjutkan.",
+   chips:[["Jumlah Soal",INTEGRITY_QUESTIONS.length+" soal"],["Estimasi","±15 menit"],["Tipe","Pilihan & skala"]]}
+];
+function showBreak(p){
+  const m=BREAK_META[p];
+  document.getElementById("th-badge").textContent=m.badge;
+  document.getElementById("th-name").textContent=m.name;
+  const tEl=document.getElementById("test-timer");
+  tEl.textContent="--:--"; tEl.className="test-timer";
+  updateProgress(0,1);
+  const isFirst=p===0;
+  document.getElementById("test-body").innerHTML=
+    '<div class="break-wrap">'+
+      '<div class="break-icon">'+m.icon+'</div>'+
+      '<div class="break-badge">'+m.badge+'</div>'+
+      '<div class="break-title">'+(isFirst?'Bersiap untuk: ':'Jeda — selanjutnya: ')+m.name+'</div>'+
+      '<div class="break-sub">'+m.sub+'</div>'+
+      '<div class="break-meta">'+m.chips.map(c=>'<div class="break-chip">'+c[0]+'<strong>'+c[1]+'</strong></div>').join("")+'</div>'+
+      (isFirst?'':'<div class="break-sub" style="margin-top:-.5rem;color:var(--text3)">Waktu pengerjaan baru mulai dihitung setelah Anda menekan tombol di bawah.</div>')+
+      '<button class="btn btn-primary" onclick="beginPhase('+p+')">Lanjutkan Tes →</button>'+
+    '</div>';
+}
+function beginPhase(p){if(p===0)renderPapi();else if(p===1)renderKraepelin();else if(p===2)renderIntegrity();}
+
+// ============================================================
+// PAPI
+// ============================================================
+function renderPapi(){papiIdx=0;document.getElementById("th-badge").textContent="Tes 1/3";document.getElementById("th-name").textContent="PAPI Kostick";startTimer(TIMER_CONFIG.papi,advancePhase);renderPapiQ();}
+function renderPapiQ(){
+  updateProgress(papiIdx,PAPI_QUESTIONS.length);
+  const q=PAPI_QUESTIONS[papiIdx],sv=testState.answers.papi[papiIdx];
+  document.getElementById("test-body").innerHTML=
+    '<div class="test-section-title">PAPI Kostick</div>'+
+    '<div class="test-section-sub">Pilih satu pernyataan yang paling mencerminkan diri Anda. Tidak ada jawaban benar atau salah — jawab sejujurnya.</div>'+
+    '<div class="q-num">SOAL '+(papiIdx+1)+' DARI '+PAPI_QUESTIONS.length+'</div>'+
+    '<div class="papi-pair">'+
+      '<div class="papi-choice '+(sv==="a"?"selected":"")+'" onclick="selPapi(\'a\')"><div class="papi-choice-letter">A</div><div class="papi-choice-text">'+q.a+'</div></div>'+
+      '<div class="papi-choice '+(sv==="b"?"selected":"")+'" onclick="selPapi(\'b\')"><div class="papi-choice-letter">B</div><div class="papi-choice-text">'+q.b+'</div></div>'+
+    '</div>'+
+    '<div class="test-nav">'+
+      '<span class="q-counter">'+(papiIdx+1)+' / '+PAPI_QUESTIONS.length+'</span>'+
+      '<div style="display:flex;gap:8px">'+
+        (papiIdx>0?'<button class="btn btn-ghost btn-sm" onclick="papiNav(-1)">← Sebelumnya</button>':'')+
+        '<button class="btn btn-primary btn-sm" onclick="papiNav(1)">'+(papiIdx===PAPI_QUESTIONS.length-1?'Selesai & Lanjut →':'Berikutnya →')+'</button>'+
+      '</div>'+
+    '</div>';}
+function selPapi(c){testState.answers.papi[papiIdx]=c;renderPapiQ();}
+function papiNav(d){if(d===1){if(!testState.answers.papi[papiIdx]){showToast("Pilih salah satu dulu","error");return;}if(papiIdx===PAPI_QUESTIONS.length-1){advancePhase();return;}papiIdx++;}else if(papiIdx>0)papiIdx--;renderPapiQ();}
+
+// ============================================================
+// KRAEPELIN
+// ============================================================
+function renderKraepelin(){
+  document.getElementById("th-badge").textContent="Tes 2/3";
+  document.getElementById("th-name").textContent="Tes Kraepelin";
+  kraepData={nums:Array.from({length:200},()=>Math.floor(Math.random()*9)+1),idx:0,correct:0,total:0,streak:0,log:[]};
+  startTimer(TIMER_CONFIG.kraepelin,advancePhase);renderKraepQ();}
+function renderKraepQ(){
+  if(kraepData.idx>=kraepData.nums.length-1){advancePhase();return;}
+  updateProgress(Math.min(kraepData.idx,140),140);
+  const a=kraepData.nums[kraepData.idx],b=kraepData.nums[kraepData.idx+1];
+  document.getElementById("test-body").innerHTML=
+    '<div class="test-section-title">Tes Kraepelin</div>'+
+    '<div class="test-section-sub">Jumlahkan dua angka berikut, lalu <strong>pilih digit satuannya</strong> pada tombol angka di bawah. Anda juga bisa menekan tombol angka di keyboard.</div>'+
+    '<div class="kraep-container">'+
+      '<div class="kraep-row-display"><div class="kraep-num-box">'+a+'</div><div class="kraep-plus">+</div><div class="kraep-num-box">'+b+'</div></div>'+
+      '<div style="font-size:12px;color:var(--text3)">Contoh: 7 + 8 = 15 → pilih <strong style=\'color:var(--accent2)\'>5</strong></div>'+
+      '<div class="kraep-keypad">'+[0,1,2,3,4,5,6,7,8,9].map(n=>'<div class="kraep-key" data-d="'+n+'" onclick="subKraepDigit('+a+','+b+','+n+')">'+n+'</div>').join("")+'</div>'+
+      '<div class="kraep-done"><div class="kraep-done-label">Soal Dikerjakan</div><div class="kraep-done-val">'+kraepData.total+'</div></div>'+
+    '</div>';}
+function subKraepDigit(a,b,ua){
+  const cor=(a+b)%10,ok=ua===cor;
+  if(ok){kraepData.correct++;kraepData.streak++;}else kraepData.streak=0;
+  kraepData.total++;kraepData.log.push({a,b,answer:ua,correct:ok});kraepData.idx++;
+  // tracking internal tetap disimpan untuk skoring HR; peserta hanya melihat jumlah soal
+  testState.answers.kraepelin={correct:kraepData.correct,total:kraepData.total,streak:kraepData.streak,log:kraepData.log};
+  renderKraepQ();}
+// Dukungan keyboard: tekan 0–9 saat sesi Kraepelin
+document.addEventListener("keydown",function(e){
+  if(testState.phase!==1)return;
+  if(!document.getElementById("page-test").classList.contains("active"))return;
+  if(e.key>="0"&&e.key<="9"){
+    const keyEl=document.querySelector('.kraep-key[data-d="'+e.key+'"]');
+    if(keyEl){e.preventDefault();keyEl.classList.add("flash");keyEl.click();}
+  }
+});
+
+// ============================================================
+// INTEGRITY
+// ============================================================
+function renderIntegrity(){intIdx=0;document.getElementById("th-badge").textContent="Tes 3/3";document.getElementById("th-name").textContent="Integrity Test";startTimer(TIMER_CONFIG.integrity,advancePhase);renderIntQ();}
+function renderIntQ(){
+  updateProgress(intIdx,INTEGRITY_QUESTIONS.length);
+  const q=INTEGRITY_QUESTIONS[intIdx],sv=testState.answers.integrity[intIdx];
+  let content="";
+  if(q.type==="choice"){
+    content='<div class="q-options">'+q.options.map((o,i)=>'<div class="q-option '+(sv===i?"selected":"")+'" onclick="selInt('+i+')"><div class="q-opt-key">'+String.fromCharCode(65+i)+'</div><div class="q-opt-text">'+o+'</div></div>').join("")+"</div>";
+  }else{
+    content='<div><div class="likert-wrap">'+[1,2,3,4,5].map(v=>'<div class="likert-btn '+(sv===v?"selected":"")+'" onclick="selInt('+v+')">'+v+'</div>').join("")+'</div><div class="likert-labels"><span>Sangat Tidak Setuju</span><span>Sangat Setuju</span></div></div>';
+  }
+  document.getElementById("test-body").innerHTML=
+    '<div class="test-section-title">Integrity Test — Bagian '+q.section+'</div>'+
+    '<div class="test-section-sub">Jawablah secara jujur sesuai kondisi nyata diri Anda.</div>'+
+    '<div class="question-card"><div class="q-num">SOAL '+(intIdx+1)+' DARI '+INTEGRITY_QUESTIONS.length+'</div><div class="q-text">'+q.text+'</div>'+content+'</div>'+
+    '<div class="test-nav">'+
+      '<span class="q-counter">'+(intIdx+1)+' / '+INTEGRITY_QUESTIONS.length+'</span>'+
+      '<div style="display:flex;gap:8px">'+
+        (intIdx>0?'<button class="btn btn-ghost btn-sm" onclick="intNav(-1)">← Sebelumnya</button>':'')+
+        '<button class="btn btn-primary btn-sm" onclick="intNav(1)">'+(intIdx===INTEGRITY_QUESTIONS.length-1?'Selesai & Lanjut →':'Berikutnya →')+'</button>'+
+      '</div>'+
+    '</div>';}
+function selInt(v){testState.answers.integrity[intIdx]=v;renderIntQ();}
+function intNav(d){if(d===1){if(testState.answers.integrity[intIdx]===undefined){showToast("Jawab pertanyaan ini dulu","error");return;}if(intIdx===INTEGRITY_QUESTIONS.length-1){advancePhase();return;}intIdx++;}else if(intIdx>0)intIdx--;renderIntQ();}
+
+// ============================================================
+// SCORING
+// ============================================================
+// Skor PAPI dari hitungan dimensi (scales) + tabel bobot. Normalisasi memakai
+// jumlah kemunculan soal nyata per dimensi (PAPI_DIM_MAX), bukan asumsi tetap "3".
+function scorePapiFromScales(scales,weights){
+  let wt=0,mw=0;
+  Object.entries(weights||{}).forEach(([s,w])=>{
+    const cap=PAPI_DIM_MAX[s]||0;          // berapa kali dimensi ini bisa dipilih
+    wt+=Math.min(scales[s]||0,cap)*w;
+    mw+=cap*w;
+  });
+  return mw>0?Math.min(Math.round((wt/mw)*100),100):50;
+}
+function calcPapi(pos){
+  const W=PAPI_WEIGHTS[pos]||{},sc={};
+  PAPI_QUESTIONS.forEach((q,i)=>{const ans=testState.answers.papi[i];if(!ans)return;const s=ans==="a"?q.scaleA:q.scaleB;sc[s]=(sc[s]||0)+1;});
+  return{score:scorePapiFromScales(sc,W),scales:sc};}
+function calcKraep(){
+  const k=testState.answers.kraepelin;if(!k||k.total===0)return{score:0,accuracy:0,speed:0,correct:0,total:0};
+  const acc=k.correct/k.total,spd=Math.min(k.total/100,1);
+  return{score:Math.round((acc*.65+spd*.35)*100),accuracy:Math.round(acc*100),speed:k.total,correct:k.correct,total:k.total};}
+function calcInteg(){
+  let ss={A:0,B:0,C:0,D:0,E:0},sm={A:0,B:0,C:0,D:0,E:0};
+  INTEGRITY_QUESTIONS.forEach((q,i)=>{const ans=testState.answers.integrity[i];if(ans===undefined)return;const s=q.section;if(q.type==="choice"){ss[s]+=(q.scores[ans]||0);sm[s]+=4;}else{ss[s]+=(q.reverse?(6-ans)-1:ans-1);sm[s]+=4;}});
+  let tot=0,mx=0;Object.keys(ss).forEach(s=>{tot+=ss[s];mx+=sm[s];});
+  const pct={};Object.keys(ss).forEach(s=>{pct[s]=sm[s]>0?Math.round((ss[s]/sm[s])*100):0;});
+  return{score:mx>0?Math.round((tot/mx)*100):0,sectionScores:pct};}
+function calcFinal(papi,kraep,integ,pos){
+  const kkm=KKM[pos]||{papi:55,kraepelin:60,integrity:62,total:60};
+  const total=Math.round(papi.score*.35+kraep.score*.3+integ.score*.35);
+  return{total,lolos:papi.score>=kkm.papi&&kraep.score>=kkm.kraepelin&&integ.score>=kkm.integrity&&total>=kkm.total,kkm};}
+
+// ============================================================
+// INSIGHTS
+// ============================================================
+function genInsights(cand,papi,kraep,integ,final){
+  const pos=cand.position,sc=papi.scales||{},si=integ.sectionScores||{};
+  const top=Object.entries(sc).sort((a,b)=>b[1]-a[1]).slice(0,4).map(([k])=>PAPI_DIM_LABELS[k]||k).join(", ");
+  const ins=[];
+  const pt=papi.score>=65
+    ?"Profil kepribadian kandidat menunjukkan kesesuaian yang "+(papi.score>=75?"sangat baik":"cukup baik")+" dengan tuntutan posisi "+pos+". Dimensi yang paling menonjol adalah "+(top||"belum teridentifikasi")+", yang merupakan prediktor kinerja positif untuk peran ini. Pola respons menunjukkan konsistensi yang "+(papi.score>=70?"tinggi, mengindikasikan jawaban yang autentik":"moderat, dapat dieksplorasi lebih lanjut melalui wawancara")+"."
+    :"Profil kepribadian kandidat menunjukkan beberapa gap dengan tuntutan posisi "+pos+" (skor "+papi.score+"/100). Dimensi yang dominan adalah "+(top||"belum teridentifikasi")+". Disarankan eksplorasi mendalam dalam sesi wawancara untuk memverifikasi kesesuaian peran dan motivasi kerja kandidat.";
+  ins.push({title:"🧠 Profil Kepribadian (PAPI Kostick)",text:pt});
+  let kt="";
+  if(kraep.accuracy>=80&&kraep.total>=80)kt="Kandidat menunjukkan kapasitas kerja kognitif yang sangat tinggi — mampu mengerjakan "+kraep.total+" soal dengan akurasi "+kraep.accuracy+"%. Ini mengindikasikan kemampuan konsentrasi dan ketepatan kerja di bawah tekanan waktu yang kuat, sangat sesuai untuk pekerjaan berulang yang menuntut ketelitian.";
+  else if(kraep.accuracy>=70&&kraep.total>=60)kt="Kandidat memiliki keseimbangan yang baik antara ketelitian ("+kraep.accuracy+"%) dan kecepatan ("+kraep.total+" soal). Pola ini mengindikasikan kemampuan kerja yang stabil dan dapat diandalkan untuk tugas-tugas operasional rutin.";
+  else if(kraep.accuracy>=70)kt="Kandidat menunjukkan ketelitian yang baik ("+kraep.accuracy+"%) namun kecepatan pengerjaan ("+kraep.total+" soal) masih dapat ditingkatkan. Cocok untuk posisi yang mengutamakan akurasi, namun perlu perhatian di lingkungan kerja bertempo tinggi.";
+  else if(kraep.total>=80)kt="Kandidat bekerja dengan tempo tinggi ("+kraep.total+" soal) namun akurasi "+kraep.accuracy+"% mengindikasikan kecenderungan tergesa-gesa yang dapat menyebabkan kesalahan. Perlu perhatian khusus terkait potensi error dalam pekerjaan yang membutuhkan ketelitian tinggi.";
+  else kt="Skor Kraepelin (akurasi "+kraep.accuracy+"%, "+kraep.total+" soal) berada di bawah ekspektasi untuk posisi "+pos+". Ini dapat mengindikasikan kesulitan dalam mempertahankan konsentrasi dalam waktu terbatas. Pertimbangkan menggali pengalaman kerja kandidat dalam tugas berulang saat wawancara.";
+  ins.push({title:"⚡ Kecepatan & Ketelitian Kerja (Kraepelin)",text:kt});
+  const iA=si.A||0,iB=si.B||0,iC=si.C||0,iD=si.D||0,iE=si.E||0;
+  let it="";
+  if(integ.score>=75){it="Kandidat menunjukkan profil integritas yang kuat ("+integ.score+"/100). Sikap terhadap kejujuran ("+iA+"/100) dan etos kerja ("+iC+"/100) dinilai positif. "+(iB>=65?"Konsistensi antara pengakuan masa lalu dan sikap saat ini mengindikasikan profil yang autentik. ":"")+"Kandidat ini terindikasi aman untuk posisi yang mengelola aset, kas, atau data sensitif perusahaan.";}
+  else if(integ.score>=60){it="Profil integritas kandidat berada di rentang moderat ("+integ.score+"/100). "+(iA<65?"Bagian A (Sikap Kejujuran: "+iA+"/100) menunjukkan area yang perlu diklarifikasi melalui wawancara. ":"")+(iD<65?"Bagian D (Toleransi Norma: "+iD+"/100) perlu diwaspadai — ada indikasi toleransi terhadap pelanggaran minor. ":"")+(iE<60?"Respons pada skenario etika kerja nyata (Bagian E: "+iE+"/100) perlu digali lebih dalam. ":"")+"Rekomendasikan wawancara behavioral yang berfokus pada situasi integritas di pekerjaan sebelumnya.";}
+  else{it="Profil integritas kandidat menunjukkan risiko signifikan ("+integ.score+"/100) yang memerlukan perhatian serius. "+(iA<50?"Sikap terhadap kejujuran dan kecurangan berada di level mengkhawatirkan ("+iA+"/100). ":"")+(iE<50?"Respons pada skenario kerja nyata menunjukkan potensi pelanggaran prosedur ("+iE+"/100). ":"")+(iD<50?"Toleransi terhadap pelanggaran norma sangat tinggi ("+iD+"/100). ":"")+"Tidak direkomendasikan untuk posisi yang memegang kas, aset, atau data sensitif tanpa pengawasan ketat.";}
+  ins.push({title:"🛡️ Profil Integritas & Etika Kerja",text:it});
+  let ft="";
+  if(final.lolos){ft="Kandidat "+cand.name+" memenuhi semua ambang batas KKM untuk posisi "+pos+" dengan skor total "+final.total+"/100 (KKM: "+final.kkm.total+"). Direkomendasikan untuk melanjutkan ke tahap wawancara struktural. Fokus pertanyaan pada: motivasi bergabung, pengalaman relevan, dan klarifikasi area yang memiliki skor moderat pada tes integritas.";}
+  else{const ga=[];if(papi.score<final.kkm.papi)ga.push("PAPI ("+papi.score+" < KKM "+final.kkm.papi+")");if(kraep.score<final.kkm.kraepelin)ga.push("Kraepelin ("+kraep.score+" < KKM "+final.kkm.kraepelin+")");if(integ.score<final.kkm.integrity)ga.push("Integritas ("+integ.score+" < KKM "+final.kkm.integrity+")");ft="Kandidat tidak memenuhi ambang batas KKM untuk posisi "+pos+". Skor total "+final.total+"/100 (KKM: "+final.kkm.total+"). Komponen tidak lolos: "+ga.join(", ")+". Tidak direkomendasikan untuk posisi ini. Pertimbangkan apakah kandidat sesuai untuk posisi lain dengan KKM berbeda.";}
+  ins.push({title:"📋 Kesimpulan & Rekomendasi",text:ft});
+  return ins;}
+
+// ============================================================
+// FINISH
+// ============================================================
+async function finishTest(){
+  clearInterval(testState.timerInterval);showPage("waiting");
+  const papi=calcPapi(candidate.position),kraep=calcKraep(),integ=calcInteg(),final=calcFinal(papi,kraep,integ,candidate.position);
+  const insights=genInsights(candidate,papi,kraep,integ,final);
+  const result={...candidate,finishTime:new Date().toISOString(),scores:{papi:papi.score,kraepelin:kraep.score,integrity:integ.score,total:final.total},details:{papi,kraep,integ},kkm:final.kkm,lolos:final.lolos,insights,rawAnswers:testState.answers};
+  let saved=false,msg="";
+  try{ await saveResult(result); saved=true; }
+  catch(e){ msg=e.status===409?"Email atau nomor HP sudah pernah dipakai untuk tes.":"Gagal menyimpan ke server. Periksa koneksi internet."; }
+  showToast(saved?"Tes selesai! Data tersimpan.":msg, saved?"success":"error");
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page-landing").classList.add("active");
+  const okHtml='<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 20% 50%,#1a1040 0%,transparent 60%),#0a0a0f;text-align:center;padding:2rem"><div class="logo-badge"><span class="logo-dot"></span>Tes Selesai</div><h1 class="landing-title">Terima Kasih,<br><span>'+candidate.name+'</span></h1><p class="landing-sub">Tes Anda telah berhasil diselesaikan dan tersimpan. Tim HR kami akan menghubungi Anda melalui email atau WhatsApp yang telah didaftarkan.</p><p style="color:var(--text3);font-size:13px;margin-top:1rem">ID Peserta: <span style="font-family:var(--mono);color:var(--accent2)">'+candidate.id+'</span></p></div>';
+  const errHtml='<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem"><div class="logo-badge" style="border-color:rgba(239,68,68,.4);color:var(--danger)"><span class="logo-dot" style="background:var(--danger)"></span>Gagal Menyimpan</div><h1 class="landing-title">Mohon Maaf</h1><p class="landing-sub">'+msg+'</p></div>';
+  document.getElementById("page-landing").innerHTML=saved?okHtml:errHtml;}
+
+// ============================================================
+// HR
+// ============================================================
+async function hrLogin(){
+  const u=document.getElementById("hr-user").value.trim(),p=document.getElementById("hr-pin").value.trim();
+  if(!u||!p){showToast("Lengkapi username & password","error");return;}
+  try{
+    const r=await apiSend("POST","/api/login",{username:u,password:p},false);
+    sessionStorage.setItem("hr_token",r.token);
+    sessionStorage.setItem("hr_logged",r.username);
+    await loadConfig();
+    await refreshResults();
+    showPage("hr");renderHRDash();
+  }catch(e){
+    showToast(e.status===401?"Username atau password salah":"Gagal terhubung ke server","error");
+  }}
+function hrLogout(){sessionStorage.removeItem("hr_token");sessionStorage.removeItem("hr_logged");location.reload();}
+function hrTab(tab,el){
+  document.querySelectorAll(".sidebar-item").forEach(i=>i.classList.remove("active"));if(el)el.classList.add("active");
+  document.getElementById("detail-panel").className="detail-panel";
+  if(tab==="dashboard")renderHRDash();else if(tab==="candidates")renderHRCands("all");else if(tab==="divisions")renderDivisionManager();else if(tab==="kkm")renderKkmSettings();else if(tab==="weights")renderWeightSettings();else if(tab==="timer")renderTimerSettings();else if(tab==="password")renderChangePw();}
+
+function renderHRDash(){
+  const r=getResults(),tot=r.length,lok=r.filter(x=>x.lolos).length,tdk=tot-lok;
+  document.getElementById("hr-main-content").innerHTML=
+    '<div class="hr-topbar"><h1 class="hr-title">Dashboard Rekrutmen</h1><span style="font-size:13px;color:var(--text3)">'+new Date().toLocaleDateString("id-ID",{weekday:"long",year:"numeric",month:"long",day:"numeric"})+'</span></div>'+
+    '<div class="stats-grid">'+
+      '<div class="stat-card"><div class="stat-label">Total Kandidat</div><div class="stat-value purple">'+tot+'</div></div>'+
+      '<div class="stat-card"><div class="stat-label">Lolos KKM</div><div class="stat-value green">'+lok+'</div></div>'+
+      '<div class="stat-card"><div class="stat-label">Tidak Lolos</div><div class="stat-value red">'+tdk+'</div></div>'+
+      '<div class="stat-card"><div class="stat-label">Tingkat Lolos</div><div class="stat-value yellow">'+(tot>0?Math.round((lok/tot)*100):0)+'%</div></div>'+
+    '</div>'+
+    '<div class="table-wrap"><div class="table-toolbar"><span class="table-title">10 Kandidat Terbaru</span>'+
+    '<div class="filter-row">'+["all",...DIVISIONS].map(f=>'<button class="filter-btn" onclick="hrTab(\'candidates\',null);renderHRCands(\''+f+'\')">'+(f==="all"?"Lihat Semua":f)+'</button>').join("")+'</div></div>'+
+    renderTable(r.slice().reverse().slice(0,10),false)+'</div>';}
+
+function renderHRCands(filter){
+  currentFilter=filter;const all=getResults();
+  currentDetailList=filter==="all"?all:all.filter(r=>r.position===filter);
+  const disp=currentDetailList.slice().reverse();
+  document.getElementById("hr-main-content").innerHTML=
+    '<div class="hr-topbar"><h1 class="hr-title">Data Kandidat</h1><button class="btn btn-ghost btn-sm" onclick="hrExportAll()">📥 Export JSON</button></div>'+
+    '<div class="table-wrap"><div class="table-toolbar"><span class="table-title">'+disp.length+' kandidat</span>'+
+    '<div class="filter-row">'+["all",...DIVISIONS].map(f=>'<button class="filter-btn '+(currentFilter===f?"active":"")+'" onclick="renderHRCands(\''+f+'\')">'+(f==="all"?"Semua":f)+'</button>').join("")+'</div></div>'+
+    renderTable(disp,true)+'</div>';}
+
+function renderTable(results,showDet){
+  if(!results.length)return'<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">Belum ada data kandidat</div></div>';
+  return'<div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Nama</th><th>Posisi</th><th>PAPI</th><th>Kraep.</th><th>Integ.</th><th>Total</th><th>Status</th>'+(showDet?'<th></th>':'')+'</tr></thead><tbody>'+
+  results.map((r,i)=>'<tr><td style="font-family:var(--mono);font-size:11px;color:var(--text3)">'+r.id+'</td><td style="font-weight:500">'+r.name+'</td><td>'+r.position+'</td>'+
+  '<td style="font-family:var(--mono)">'+(r.scores?.papi??"-")+'</td><td style="font-family:var(--mono)">'+(r.scores?.kraepelin??"-")+'</td>'+
+  '<td style="font-family:var(--mono)">'+(r.scores?.integrity??"-")+'</td><td style="font-family:var(--mono);font-weight:600">'+(r.scores?.total??"-")+'</td>'+
+  '<td><span class="badge '+(r.lolos?"badge-lolos":"badge-tidak")+'">'+(r.lolos?"✓ Lolos":"✗ Tidak Lolos")+'</span></td>'+
+  (showDet?'<td><button class="btn-link" onclick="openDetail('+i+')">Detail →</button></td>':'')+
+  '</tr>').join("")+'</tbody></table></div>';}
+
+function sRow(label,val,kkm,color){const ok=val>=kkm;return'<div class="score-row"><span class="score-label">'+label+' <span style="font-size:10px;color:var(--text3)">(KKM:'+kkm+')</span></span><div class="score-bar-wrap"><div class="score-bar" style="width:'+val+'%;background:'+(ok?color:'var(--danger)')+'"></div></div><span class="score-val" style="color:'+(ok?color:'var(--danger)')+'">'+val+'</span></div>';}
+
+function openDetail(idx){
+  const r=currentDetailList.slice().reverse()[idx];if(!r)return;
+  const kkm=r.kkm||KKM[r.position]||{},ins=r.insights||[],iS=r.details?.integ?.sectionScores||{},kD=r.details?.kraep||{},pS=r.details?.papi?.scales||{};
+  const topD=Object.entries(pS).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  document.getElementById("detail-panel").innerHTML=
+    '<button class="detail-close" onclick="document.getElementById(\'detail-panel\').className=\'detail-panel\'">✕</button>'+
+    '<div class="detail-name">'+r.name+'</div>'+
+    '<div class="detail-meta">'+r.position+' · '+r.id+'</div>'+
+    '<div class="detail-meta">'+r.email+' · '+r.phone+'</div>'+
+    '<div class="detail-meta" style="margin-top:4px;font-size:12px;color:var(--text3)">Mulai: '+new Date(r.startTime).toLocaleString("id-ID")+' · Selesai: '+(r.finishTime?new Date(r.finishTime).toLocaleString("id-ID"):"-")+'</div>'+
+    '<div class="result-box '+(r.lolos?"result-lolos":"result-tidak")+'" style="margin-top:1.5rem"><div class="result-text">'+(r.lolos?"✓ LOLOS KKM":"✗ TIDAK LOLOS KKM")+'</div><div class="result-sub">Skor Total: '+r.scores?.total+'/100 · KKM: '+kkm.total+'</div></div>'+
+    '<div class="detail-section"><div class="detail-section-title">Breakdown Skor vs KKM</div>'+sRow("PAPI Kostick",r.scores?.papi,kkm.papi,"#6c63ff")+sRow("Kraepelin",r.scores?.kraepelin,kkm.kraepelin,"#f59e0b")+sRow("Integrity",r.scores?.integrity,kkm.integrity,"#4ade80")+sRow("Total",r.scores?.total,kkm.total,"#9d97ff")+'</div>'+
+    (kD.total>0?'<div class="detail-section"><div class="detail-section-title">Detail Kraepelin</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><div class="stat-card"><div class="stat-label">Soal</div><div class="stat-value" style="font-size:1.3rem">'+kD.total+'</div></div><div class="stat-card"><div class="stat-label">Benar</div><div class="stat-value" style="font-size:1.3rem;color:var(--accent3)">'+kD.correct+'</div></div><div class="stat-card"><div class="stat-label">Akurasi</div><div class="stat-value" style="font-size:1.3rem;color:var(--accent4)">'+kD.accuracy+'%</div></div></div></div>':'')+
+    (Object.keys(iS).length>0?'<div class="detail-section"><div class="detail-section-title">Integrity per Bagian</div><div class="dim-grid"><div class="dim-item"><div class="dim-name">A — Sikap Kejujuran</div><div class="dim-val" style="color:'+(( iS.A||0)>=65?"var(--accent3)":"var(--danger)")+'">'+( iS.A||0)+'/100</div></div><div class="dim-item"><div class="dim-name">B — Pengakuan Lalu</div><div class="dim-val" style="color:'+((iS.B||0)>=60?"var(--accent3)":"var(--danger)")+'">'+( iS.B||0)+'/100</div></div><div class="dim-item"><div class="dim-name">C — Etos Kerja</div><div class="dim-val" style="color:'+((iS.C||0)>=65?"var(--accent3)":"var(--danger)")+'">'+( iS.C||0)+'/100</div></div><div class="dim-item"><div class="dim-name">D — Norma & Etika</div><div class="dim-val" style="color:'+((iS.D||0)>=65?"var(--accent3)":"var(--danger)")+'">'+( iS.D||0)+'/100</div></div><div class="dim-item"><div class="dim-name">E — Skenario Nyata</div><div class="dim-val" style="color:'+((iS.E||0)>=60?"var(--accent3)":"var(--danger)")+'">'+( iS.E||0)+'/100</div></div></div></div>':'')+
+    (topD.length>0?'<div class="detail-section"><div class="detail-section-title">Dimensi PAPI Dominan</div><div class="dim-grid">'+topD.map(([k,v])=>'<div class="dim-item"><div class="dim-name">'+(PAPI_DIM_LABELS[k]||k)+'</div><div class="dim-val">'+v+' respons</div></div>').join("")+'</div></div>':'')+
+    '<div class="detail-section"><div class="detail-section-title">Interpretasi & Insight HR</div>'+ins.map(i=>'<div class="insight-card"><div class="insight-title">'+i.title+'</div><div class="insight-text">'+i.text+'</div></div>').join("")+'</div>'+
+    '<div class="detail-section" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-ghost btn-sm" style="flex:1" onclick="exportPDF(\''+r.id+'\')">📄 Export PDF</button><button class="btn btn-ghost btn-sm" style="flex:1" onclick="exportJSON(\''+r.id+'\')">📥 Export JSON</button></div>';
+  document.getElementById("detail-panel").className="detail-panel open";}
+
+function renderChangePw(){
+  document.getElementById("detail-panel").className="detail-panel";
+  const me=sessionStorage.getItem("hr_logged")||"admin";
+  document.getElementById("hr-main-content").innerHTML=
+    '<div class="hr-topbar"><h1 class="hr-title">Ganti Password HR</h1></div>'+
+    '<div style="max-width:460px"><div class="form-card">'+
+    '<p class="form-sub">Ubah password untuk akun yang sedang login. Perubahan langsung berlaku & tersimpan terenkripsi di server.</p>'+
+    '<div class="form-group"><label class="form-label">Akun</label><input class="form-input" value="'+me+'" disabled style="opacity:.7"></div>'+
+    '<div class="form-group"><label class="form-label">Password Lama</label><input class="form-input" id="pw-old" type="password" placeholder="Password saat ini"></div>'+
+    '<div class="form-group"><label class="form-label">Password Baru</label><input class="form-input" id="pw-new" type="password" placeholder="Minimal 6 karakter"></div>'+
+    '<div class="form-group"><label class="form-label">Konfirmasi Password Baru</label><input class="form-input" id="pw-conf" type="password" placeholder="Ulangi password baru"></div>'+
+    '<div class="form-divider"></div>'+
+    '<button class="btn btn-primary" style="width:100%" onclick="doChangePw()">Simpan Password →</button>'+
+    '</div></div>';}
+async function doChangePw(){
+  const o=document.getElementById("pw-old").value,n=document.getElementById("pw-new").value,c=document.getElementById("pw-conf").value;
+  if(!o||!n||!c){showToast("Lengkapi semua field","error");return;}
+  if(n.length<6){showToast("Password baru minimal 6 karakter","error");return;}
+  if(n!==c){showToast("Konfirmasi password tidak cocok","error");return;}
+  try{
+    await apiSend("POST","/api/password",{oldPassword:o,newPassword:n},true);
+    showToast("Password berhasil diubah!","success");
+    ["pw-old","pw-new","pw-conf"].forEach(id=>document.getElementById(id).value="");
+  }catch(e){showToast(e.message||"Gagal mengubah password","error");}}
+
+function renderDivisionManager(){
+  document.getElementById("detail-panel").className="detail-panel";
+  const results=getResults();
+  const countFor=(pos)=>results.filter(r=>r.position===pos).length;
+
+  let cards="";
+  for(const pos of DIVISIONS){
+    const m=divMeta(pos), isDefault=DIVISIONS_DEFAULT.includes(pos), used=countFor(pos);
+    const k=KKM[pos]||getKkmDefault(pos);
+    cards+=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem">
+      <div style="padding:1rem 1.25rem;background:${m.bg};border-bottom:1px solid ${m.border};display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:1.3rem">${m.icon}</span>
+          <div>
+            <div style="font-size:15px;font-weight:600;color:${m.text}">${pos}</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:1px">${used} kandidat · ${isDefault?'Divisi bawaan':'Divisi tambahan'}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm" onclick="hrTab('kkm',document.querySelectorAll('.sidebar-item')[3]);" style="font-size:11px">🎯 Atur KKM</button>
+          <button class="btn btn-ghost btn-sm" onclick="hrTab('weights',document.querySelectorAll('.sidebar-item')[4]);" style="font-size:11px">⚖️ Atur Bobot</button>
+          ${isDefault?'':`<button class="btn btn-ghost btn-sm" onclick="deleteDivision('${pos.replace(/'/g,"\\'")}')" style="font-size:11px;color:var(--danger);border-color:rgba(239,68,68,.3)">✕ Hapus</button>`}
+        </div>
+      </div>
+      <div style="padding:.75rem 1.25rem;font-size:12px;color:var(--text2)">
+        KKM aktif: PAPI ≥ <strong style="color:var(--text)">${k.papi}</strong> · Kraepelin ≥ <strong style="color:var(--text)">${k.kraepelin}</strong> · Integrity ≥ <strong style="color:var(--text)">${k.integrity}</strong> · Total ≥ <strong style="color:var(--text)">${k.total}</strong>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById("hr-main-content").innerHTML=
+    `<div class="hr-topbar">
+      <div>
+        <h1 class="hr-title">Kelola Divisi</h1>
+        <p style="font-size:13px;color:var(--text2);margin-top:2px">Tambah divisi/posisi baru. Setelah dibuat, KKM & bobot PAPI Kostick langsung bisa diatur.</p>
+      </div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;max-width:640px">
+      <div style="font-size:14px;font-weight:600;margin-bottom:1rem">➕ Tambah Divisi Baru</div>
+      <div style="display:grid;grid-template-columns:1fr 96px;gap:12px;margin-bottom:1rem">
+        <div>
+          <label class="form-label">Nama Divisi / Posisi</label>
+          <input class="form-input" id="new-div-name" type="text" placeholder="mis. Customer Service" onkeyup="if(event.key==='Enter')addDivision()">
+        </div>
+        <div>
+          <label class="form-label">Ikon</label>
+          <input class="form-input" id="new-div-icon" type="text" maxlength="3" placeholder="🏷️" style="text-align:center;font-size:18px">
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:6px">KKM awal (bisa diubah nanti di menu Atur KKM)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem">
+        ${[['papi','PAPI',55],['kraepelin','Kraepelin',55],['integrity','Integrity',60],['total','Total',60]].map(([key,lbl,def])=>
+          `<div><label style="display:block;font-size:11px;color:var(--text2);margin-bottom:4px">${lbl}</label>
+           <input type="number" min="0" max="100" id="new-div-${key}" value="${def}" style="width:100%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);color:var(--text);font-family:var(--mono);font-size:14px;font-weight:600;outline:none;text-align:center"></div>`).join("")}
+      </div>
+      <button class="btn btn-primary" style="width:100%" onclick="addDivision()">Tambah Divisi →</button>
+    </div>
+    <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">Divisi Saat Ini (${DIVISIONS.length})</div>
+    ${cards}`;}
+
+async function addDivision(){
+  const name=(document.getElementById("new-div-name").value||"").trim();
+  if(!name){showToast("Nama divisi tidak boleh kosong","error");return;}
+  if(DIVISIONS.some(d=>d.toLowerCase()===name.toLowerCase())){showToast("Divisi dengan nama ini sudah ada","error");return;}
+  const icon=(document.getElementById("new-div-icon").value||"").trim();
+  const clamp=v=>{const n=parseInt(v);return isNaN(n)?60:Math.max(0,Math.min(100,n));};
+  const kkm={papi:clamp(document.getElementById("new-div-papi").value),kraepelin:clamp(document.getElementById("new-div-kraepelin").value),integrity:clamp(document.getElementById("new-div-integrity").value),total:clamp(document.getElementById("new-div-total").value)};
+  DIVISIONS.push(name);
+  const meta=icon?{...divMeta(name),icon}:divMeta(name);
+  DIVISION_META[name]=meta;
+  KKM[name]={...kkm}; DIV_KKM_DEFAULT[name]={...kkm};
+  PAPI_WEIGHTS[name]={};  DIV_W_DEFAULT[name]={};
+  try{
+    await persistDivisions();
+    populateDivisionDropdown();
+    showToast(`Divisi "${name}" ditambahkan. Silakan atur KKM & bobotnya.`,"success");
+    hrTab('kkm',document.querySelectorAll('.sidebar-item')[3]); // langsung ke Atur KKM
+  }catch(e){
+    // rollback in-memory jika gagal simpan
+    DIVISIONS=DIVISIONS.filter(d=>d!==name);
+    delete DIVISION_META[name];delete KKM[name];delete PAPI_WEIGHTS[name];delete DIV_KKM_DEFAULT[name];delete DIV_W_DEFAULT[name];
+    showToast("Gagal menyimpan divisi ke server","error");
+  }
+}
+
+async function deleteDivision(pos){
+  if(DIVISIONS_DEFAULT.includes(pos)){showToast("Divisi bawaan tidak dapat dihapus","error");return;}
+  const used=getResults().filter(r=>r.position===pos).length;
+  if(used>0){showToast(`Tidak bisa dihapus: ada ${used} kandidat pada divisi ini`,"error");return;}
+  if(!confirm(`Hapus divisi "${pos}"? KKM & bobot untuk divisi ini akan ikut terhapus.`))return;
+  const bak={d:[...DIVISIONS],m:{...DIVISION_META},k:{...KKM},w:{...PAPI_WEIGHTS},dk:{...DIV_KKM_DEFAULT},dw:{...DIV_W_DEFAULT}};
+  DIVISIONS=DIVISIONS.filter(d=>d!==pos);
+  delete DIVISION_META[pos]; delete KKM[pos]; delete PAPI_WEIGHTS[pos];
+  delete DIV_KKM_DEFAULT[pos]; delete DIV_W_DEFAULT[pos];
+  try{
+    await persistDivisions();
+    populateDivisionDropdown();
+    showToast(`Divisi "${pos}" dihapus.`,"success");
+    renderDivisionManager();
+  }catch(e){
+    DIVISIONS=bak.d;DIVISION_META=bak.m;KKM=bak.k;PAPI_WEIGHTS=bak.w;DIV_KKM_DEFAULT=bak.dk;DIV_W_DEFAULT=bak.dw;
+    showToast("Gagal menyimpan perubahan ke server","error");
+  }
+}
+
+function renderKkmSettings(){
+  document.getElementById("detail-panel").className="detail-panel";
+  const positions=DIVISIONS;
+  const components=[{key:"papi",label:"PAPI Kostick",desc:"Kepribadian & orientasi kerja"},{key:"kraepelin",label:"Kraepelin",desc:"Ketelitian & kecepatan kognitif"},{key:"integrity",label:"Integrity Test",desc:"Integritas & etika kerja"},{key:"total",label:"Skor Total",desc:"Gabungan tertimbang (35/30/35)"}];
+  const posIcons={"Cashier":"💰","Driver":"🚗","Inventory Man":"📦","Telemarketing":"📞"};
+  const posColors={"Cashier":"rgba(24,95,165,.12)","Driver":"rgba(15,110,86,.12)","Inventory Man":"rgba(133,79,11,.12)","Telemarketing":"rgba(153,53,86,.12)"};
+  const posBorder={"Cashier":"rgba(24,95,165,.35)","Driver":"rgba(15,110,86,.35)","Inventory Man":"rgba(133,79,11,.35)","Telemarketing":"rgba(153,53,86,.35)"};
+  const posText={"Cashier":"#185FA5","Driver":"#0F6E56","Inventory Man":"#854F0B","Telemarketing":"#993556"};
+
+  let cards="";
+  for(const pos of positions){
+    const k=KKM[pos],dk=getKkmDefault(pos);
+    const isDiff=Object.keys(dk).some(c=>k[c]!==dk[c]);
+    cards+=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.25rem">
+      <div style="padding:1rem 1.25rem;background:${posColors[pos]};border-bottom:1px solid ${posBorder[pos]};display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:1.2rem">${posIcons[pos]}</span>
+          <div>
+            <div style="font-size:15px;font-weight:600;color:${posText[pos]}">${pos}</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:1px">KKM minimum per komponen</div>
+          </div>
+        </div>
+        ${isDiff?`<span style="font-size:10px;background:rgba(245,158,11,.15);color:var(--accent4);border:1px solid rgba(245,158,11,.3);padding:3px 10px;border-radius:100px;letter-spacing:.04em">DIMODIFIKASI</span>`:`<span style="font-size:10px;color:var(--text3)">Default</span>`}
+      </div>
+      <div style="padding:1rem 1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">`;
+    for(const c of components){
+      const val=k[c.key],def=dk[c.key],changed=val!==def;
+      cards+=`<div>
+          <label style="display:block;font-size:11px;color:var(--text2);margin-bottom:5px;font-weight:500">${c.label} <span style="color:var(--text3);font-weight:400">— ${c.desc}</span></label>
+          <div style="display:flex;align-items:center;gap:8px">
+            <input type="number" min="0" max="100"
+              id="kkm-${pos.replace(/ /g,'_')}-${c.key}"
+              value="${val}"
+              style="width:72px;padding:7px 10px;background:var(--bg3);border:1px solid ${changed?'var(--accent4)':'var(--border)'};border-radius:var(--radius2);color:${changed?'var(--accent4)':'var(--text)'};font-family:var(--mono);font-size:14px;font-weight:600;outline:none;transition:border-color .2s"
+              oninput="previewKkm(this,'${pos}','${c.key}',${def})"
+              onfocus="this.style.borderColor='var(--accent)'"
+              onblur="previewKkm(this,'${pos}','${c.key}',${def})">
+            <div>
+              <div style="font-size:10px;color:var(--text3)">Default: <strong style="color:var(--text2)">${def}</strong></div>
+              ${changed?`<div id="diff-${pos.replace(/ /g,'_')}-${c.key}" style="font-size:10px;color:var(--accent4)">${val>def?'▲':'▼'} ${Math.abs(val-def)} dari default</div>`:`<div id="diff-${pos.replace(/ /g,'_')}-${c.key}" style="font-size:10px;color:var(--text3)">Tidak berubah</div>`}
+            </div>
+          </div>
+        </div>`;
+    }
+    cards+=`</div>
+        <div style="margin-top:1rem;padding:10px 12px;background:var(--bg3);border-radius:var(--radius2);border:1px solid var(--border)">
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px">Preview: kandidat LOLOS jika semua komponen ≥ nilai di atas</div>
+          <div id="preview-${pos.replace(/ /g,'_')}" style="font-size:12px;color:var(--text2)">PAPI ≥ ${k.papi} &nbsp;·&nbsp; Kraepelin ≥ ${k.kraepelin} &nbsp;·&nbsp; Integrity ≥ ${k.integrity} &nbsp;·&nbsp; Total ≥ ${k.total}</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Impact analysis — re-evaluate existing results
+  const results=getResults();
+  let impactHTML="";
+  if(results.length>0){
+    let changed=0;
+    for(const r of results){
+      const k=KKM[r.position]||getKkmDefault(r.position);
+      const nowLolos=r.scores.papi>=k.papi&&r.scores.kraepelin>=k.kraepelin&&r.scores.integrity>=k.integrity&&r.scores.total>=k.total;
+      if(nowLolos!==r.lolos)changed++;
+    }
+    impactHTML=`<div style="padding:12px 16px;background:${changed>0?'rgba(245,158,11,.08)':'rgba(74,222,128,.06)'};border:1px solid ${changed>0?'rgba(245,158,11,.25)':'rgba(74,222,128,.2)'};border-radius:var(--radius2);margin-bottom:1.25rem">
+      <div style="font-size:13px;font-weight:600;color:${changed>0?'var(--accent4)':'var(--accent3)'};margin-bottom:4px">${changed>0?`⚠ ${changed} kandidat akan berubah status setelah disimpan`:'✓ Tidak ada perubahan status kandidat saat ini'}</div>
+      <div style="font-size:12px;color:var(--text2)">KKM hanya memengaruhi evaluasi baru. Klik "Terapkan & Simpan" untuk menyimpan KKM dan me-refresh status semua kandidat yang ada.</div>
+    </div>`;
+  }
+
+  document.getElementById("hr-main-content").innerHTML=
+    `<div class="hr-topbar">
+      <div>
+        <h1 class="hr-title">Pengaturan KKM</h1>
+        <p style="font-size:13px;color:var(--text2);margin-top:2px">Atur ambang batas minimum kelulusan per posisi dan per komponen tes.</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" onclick="resetKkm()">↺ Reset ke Default</button>
+        <button class="btn btn-primary" onclick="saveKkmSettings()">Terapkan & Simpan →</button>
+      </div>
+    </div>
+    ${impactHTML}
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:12px 16px;margin-bottom:1.25rem;font-size:12px;color:var(--text2);line-height:1.7">
+      <strong style="color:var(--text)">Cara kerja:</strong> Kandidat LOLOS jika <em>semua</em> komponen memenuhi KKM-nya sekaligus (logika AND). Mengubah satu nilai saja dapat mengubah hasil kelulusan kandidat yang sudah ada. Perubahan disimpan di <strong>database online</strong> dan langsung konsisten di semua perangkat.
+    </div>
+    ${cards}
+    <div style="display:flex;gap:8px;margin-top:.5rem">
+      <button class="btn btn-ghost btn-sm" onclick="resetKkm()">↺ Reset ke Default</button>
+      <button class="btn btn-primary" onclick="saveKkmSettings()">Terapkan & Simpan →</button>
+    </div>`;}
+
+function previewKkm(el,pos,comp,def){
+  const val=parseInt(el.value)||0;
+  const posId=pos.replace(/ /g,'_');
+  const diffEl=document.getElementById('diff-'+posId+'-'+comp);
+  if(val!==def){
+    el.style.borderColor='var(--accent4)';el.style.color='var(--accent4)';
+    if(diffEl)diffEl.innerHTML=`<span style="color:var(--accent4)">${val>def?'▲':'▼'} ${Math.abs(val-def)} dari default</span>`;
+  } else {
+    el.style.borderColor='var(--border)';el.style.color='var(--text)';
+    if(diffEl)diffEl.textContent='Tidak berubah';
+  }
+  // Update live preview row
+  const comps=["papi","kraepelin","integrity","total"];
+  const labels=["PAPI","Kraepelin","Integrity","Total"];
+  const vals=comps.map(c=>{
+    const inp=document.getElementById('kkm-'+posId+'-'+c);
+    return inp?parseInt(inp.value)||0:KKM[pos][c];
+  });
+  const prev=document.getElementById('preview-'+posId);
+  if(prev)prev.innerHTML=labels.map((l,i)=>`${l} ≥ <strong style="color:var(--text)">${vals[i]}</strong>`).join(' &nbsp;·&nbsp; ');
+}
+
+async function saveKkmSettings(){
+  const positions=DIVISIONS;
+  const comps=["papi","kraepelin","integrity","total"];
+  let hasError=false;
+  for(const pos of positions){
+    const posId=pos.replace(/ /g,'_');
+    for(const c of comps){
+      const el=document.getElementById('kkm-'+posId+'-'+c);
+      if(!el)continue;
+      const v=parseInt(el.value);
+      if(isNaN(v)||v<0||v>100){showToast(`Nilai KKM harus 0–100 (${pos} / ${c})`,"error");hasError=true;break;}
+      KKM[pos][c]=v;
+    }
+    if(hasError)break;
+  }
+  if(hasError)return;
+  // Re-evaluate all existing results with new KKM
+  const results=getResults();
+  let recount=0;
+  const updated=results.map(r=>{
+    const k=KKM[r.position]||getKkmDefault(r.position);
+    const newLolos=r.scores.papi>=k.papi&&r.scores.kraepelin>=k.kraepelin&&r.scores.integrity>=k.integrity&&r.scores.total>=k.total;
+    if(newLolos!==r.lolos){recount++;return{...r,lolos:newLolos,kkm:k};}
+    return{...r,kkm:k};
+  });
+  try{
+    await saveConfig({kkm:KKM});
+    await putResults(updated);
+    showToast(recount>0?`KKM disimpan. ${recount} status kandidat diperbarui.`:"KKM berhasil disimpan!","success");
+    setTimeout(()=>renderKkmSettings(),400);
+  }catch(e){showToast("Gagal menyimpan ke server","error");}}
+
+async function resetKkm(){
+  if(!confirm("Reset semua KKM ke nilai default? Perubahan yang belum disimpan akan hilang."))return;
+  KKM={};DIVISIONS.forEach(p=>KKM[p]=getKkmDefault(p));
+  try{await saveConfig({kkm:KKM});showToast("KKM direset ke default.","success");}
+  catch(e){showToast("Gagal menyimpan ke server","error");}
+  renderKkmSettings();}
+
+// ============================================================
+// PENGATURAN BOBOT DIMENSI PAPI (per divisi)
+// ============================================================
+const PAPI_POS_META={
+  "Cashier":{icon:"💰",bg:"rgba(24,95,165,.12)",border:"rgba(24,95,165,.35)",text:"#185FA5"},
+  "Driver":{icon:"🚗",bg:"rgba(15,110,86,.12)",border:"rgba(15,110,86,.35)",text:"#0F6E56"},
+  "Inventory Man":{icon:"📦",bg:"rgba(133,79,11,.12)",border:"rgba(133,79,11,.35)",text:"#854F0B"},
+  "Telemarketing":{icon:"📞",bg:"rgba(153,53,86,.12)",border:"rgba(153,53,86,.35)",text:"#993556"}
+};
+// PAPI_POSITIONS kini diganti DIVISIONS (dinamis)
+
+function papiTotalWeight(pos){return Object.values(PAPI_WEIGHTS[pos]||{}).reduce((a,b)=>a+(parseFloat(b)||0),0);}
+
+function renderWeightSettings(){
+  document.getElementById("detail-panel").className="detail-panel";
+  // Semua dimensi yang punya minimal 1 soal, urut: berbobot dulu (bobot desc), lalu cakupan soal desc
+  const allDims=Object.keys(PAPI_DIM_MAX).sort((a,b)=>(PAPI_DIM_MAX[b]-PAPI_DIM_MAX[a])||a.localeCompare(b));
+
+  // Analisis dampak: re-skor PAPI semua kandidat dengan bobot tersimpan saat ini
+  const results=getResults();
+  let impactHTML="";
+  if(results.length>0){
+    let changed=0;
+    for(const r of results){
+      const scales=r.details?.papi?.scales;if(!scales)continue;
+      const np=scorePapiFromScales(scales,PAPI_WEIGHTS[r.position]||{});
+      const k=KKM[r.position]||getKkmDefault(r.position);
+      const nt=Math.round(np*.35+(r.scores.kraepelin||0)*.3+(r.scores.integrity||0)*.35);
+      const nl=np>=k.papi&&(r.scores.kraepelin||0)>=k.kraepelin&&(r.scores.integrity||0)>=k.integrity&&nt>=k.total;
+      if(np!==r.scores.papi||nl!==r.lolos)changed++;
+    }
+    impactHTML=`<div style="padding:12px 16px;background:${changed>0?'rgba(245,158,11,.08)':'rgba(74,222,128,.06)'};border:1px solid ${changed>0?'rgba(245,158,11,.25)':'rgba(74,222,128,.2)'};border-radius:var(--radius2);margin-bottom:1.25rem">
+      <div style="font-size:13px;font-weight:600;color:${changed>0?'var(--accent4)':'var(--accent3)'};margin-bottom:4px">${changed>0?`⚠ ${changed} kandidat akan berubah skor/status PAPI setelah disimpan`:'✓ Bobot tersimpan saat ini konsisten dengan skor kandidat'}</div>
+      <div style="font-size:12px;color:var(--text2)">Mengubah bobot akan menghitung ulang skor PAPI seluruh kandidat dari pola jawaban mereka yang tersimpan. Klik "Terapkan & Simpan" untuk menerapkan.</div>
+    </div>`;
+  }
+
+  let cards="";
+  for(const pos of DIVISIONS){
+    const m=divMeta(pos),posId=pos.replace(/ /g,'_');
+    const W=PAPI_WEIGHTS[pos]||{},DW=getWeightDefault(pos);
+    const isDiff=JSON.stringify(W)!==JSON.stringify(DW);
+    const active=allDims.filter(d=>(parseFloat(W[d])||0)>0);
+    const inactive=allDims.filter(d=>!((parseFloat(W[d])||0)>0));
+
+    const dimRow=(d)=>{
+      const w=parseFloat(W[d])||0, def=parseFloat(DW[d])||0, cov=PAPI_DIM_MAX[d]||0, changed=w!==def;
+      return `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px dashed var(--border)">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:500;color:${w>0?'var(--text)':'var(--text3)'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${PAPI_DIM_LABELS[d]||d}</div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">${d} · muncul di ${cov} soal</div>
+        </div>
+        <input type="number" min="0" max="5" step="0.5"
+          id="w-${posId}-${d}" value="${w}"
+          style="width:64px;padding:6px 8px;background:var(--bg3);border:1px solid ${changed?'var(--accent4)':'var(--border)'};border-radius:var(--radius2);color:${changed?'var(--accent4)':(w>0?'var(--text)':'var(--text3)')};font-family:var(--mono);font-size:14px;font-weight:600;outline:none;text-align:center"
+          oninput="previewWeight('${pos}')"
+          onfocus="this.style.borderColor='var(--accent)'">
+        <div style="width:58px;font-size:10px;color:var(--text3);line-height:1.3">def<br><strong style="color:var(--text2)">${def}</strong></div>
+      </div>`;
+    };
+
+    cards+=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.25rem">
+      <div style="padding:1rem 1.25rem;background:${m.bg};border-bottom:1px solid ${m.border};display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:1.2rem">${m.icon}</span>
+          <div>
+            <div style="font-size:15px;font-weight:600;color:${m.text}">${pos}</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:1px">Bobot tiap dimensi kepribadian — 0 = tidak dinilai</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          ${isDiff?`<span style="font-size:10px;background:rgba(245,158,11,.15);color:var(--accent4);border:1px solid rgba(245,158,11,.3);padding:3px 10px;border-radius:100px;letter-spacing:.04em">DIMODIFIKASI</span>`:`<span style="font-size:10px;color:var(--text3)">Default</span>`}
+          <button class="btn btn-ghost btn-sm" style="padding:4px 10px;font-size:11px" onclick="resetWeightPos('${pos}')">↺ default</button>
+        </div>
+      </div>
+      <div style="padding:.5rem 1.25rem 1rem">
+        <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:.75rem 0 .25rem">Dimensi dinilai</div>
+        ${active.length?active.map(dimRow).join(""):`<div style="font-size:12px;color:var(--text3);padding:6px 0">Belum ada dimensi berbobot untuk posisi ini.</div>`}
+        <details style="margin-top:.75rem">
+          <summary style="font-size:12px;color:var(--accent2);cursor:pointer;user-select:none">+ ${inactive.length} dimensi lain (bobot 0) — klik untuk menambah</summary>
+          <div style="margin-top:.5rem">${inactive.map(dimRow).join("")}</div>
+        </details>
+        <div style="margin-top:1rem;padding:10px 12px;background:var(--bg3);border-radius:var(--radius2);border:1px solid var(--border)">
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px">Ringkasan bobot posisi ini</div>
+          <div id="wsum-${posId}" style="font-size:12px;color:var(--text2)"></div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById("hr-main-content").innerHTML=
+    `<div class="hr-topbar">
+      <div>
+        <h1 class="hr-title">Bobot Dimensi PAPI</h1>
+        <p style="font-size:13px;color:var(--text2);margin-top:2px">Atur seberapa besar tiap dimensi kepribadian memengaruhi skor PAPI — per divisi.</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" onclick="resetWeights()">↺ Reset Semua</button>
+        <button class="btn btn-primary" onclick="saveWeightSettings()">Terapkan & Simpan →</button>
+      </div>
+    </div>
+    ${impactHTML}
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:12px 16px;margin-bottom:1.25rem;font-size:12px;color:var(--text2);line-height:1.7">
+      <strong style="color:var(--text)">Cara kerja:</strong> Skor PAPI = <em>Σ(pilihan dimensi × bobot)</em> dibagi <em>Σ(jumlah soal dimensi × bobot)</em>, lalu diskalakan ke 0–100. Karena pembaginya kini memakai <strong>jumlah soal nyata tiap dimensi</strong> (tertera di tiap baris), bobot yang Anda set benar-benar mencerminkan pengaruhnya — dimensi dengan banyak soal tidak lagi otomatis dominan. Bobot 0 berarti dimensi tidak ikut dinilai. Perubahan disimpan di <strong>database online</strong> dan menghitung ulang skor PAPI semua kandidat lama.
+    </div>
+    ${cards}
+    <div style="display:flex;gap:8px;margin-top:.5rem">
+      <button class="btn btn-ghost btn-sm" onclick="resetWeights()">↺ Reset Semua</button>
+      <button class="btn btn-primary" onclick="saveWeightSettings()">Terapkan & Simpan →</button>
+    </div>`;
+  DIVISIONS.forEach(p=>previewWeight(p));
+}
+
+function readWeightInputs(pos){
+  const posId=pos.replace(/ /g,'_');const out={};
+  Object.keys(PAPI_DIM_MAX).forEach(d=>{
+    const el=document.getElementById('w-'+posId+'-'+d);
+    if(!el)return;const v=parseFloat(el.value);
+    if(!isNaN(v)&&v>0)out[d]=v;
+  });
+  return out;
+}
+
+function previewWeight(pos){
+  const posId=pos.replace(/ /g,'_');
+  const W=readWeightInputs(pos);
+  const total=Object.values(W).reduce((a,b)=>a+b,0);
+  const entries=Object.entries(W).sort((a,b)=>b[1]-a[1]);
+  const sum=document.getElementById('wsum-'+posId);
+  // Warnai input sesuai beda dari default
+  const DW=getWeightDefault(pos);
+  Object.keys(PAPI_DIM_MAX).forEach(d=>{
+    const el=document.getElementById('w-'+posId+'-'+d);if(!el)return;
+    const v=parseFloat(el.value)||0,def=parseFloat(DW[d])||0,changed=v!==def;
+    el.style.borderColor=changed?'var(--accent4)':'var(--border)';
+    el.style.color=changed?'var(--accent4)':(v>0?'var(--text)':'var(--text3)');
+  });
+  if(!sum)return;
+  if(total<=0){sum.innerHTML='<span style="color:var(--accent4)">⚠ Total bobot 0 — skor PAPI akan jadi 50 (netral) untuk posisi ini.</span>';return;}
+  sum.innerHTML=`<div style="margin-bottom:6px">Total bobot: <strong style="color:var(--text)">${total.toFixed(1)}</strong> · ${entries.length} dimensi aktif</div>`+
+    entries.map(([d,w])=>{
+      const share=Math.round((w/total)*100);
+      return `<div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+        <span style="width:130px;font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${PAPI_DIM_LABELS[d]||d}</span>
+        <span style="flex:1;height:6px;background:var(--bg4);border-radius:3px;overflow:hidden"><span style="display:block;height:100%;width:${share}%;background:var(--accent)"></span></span>
+        <span style="font-size:11px;font-family:var(--mono);color:var(--text3);width:34px;text-align:right">${share}%</span>
+      </div>`;
+    }).join("");
+}
+
+// Hitung ulang skor PAPI semua kandidat dari pola jawaban tersimpan. Return {updated,recount}.
+function computeWeightRecompute(){
+  const results=getResults();let recount=0;
+  const updated=results.map(r=>{
+    const scales=r.details?.papi?.scales;if(!scales)return r;
+    const np=scorePapiFromScales(scales,PAPI_WEIGHTS[r.position]||{});
+    const kr=r.scores.kraepelin||0,ig=r.scores.integrity||0;
+    const nt=Math.round(np*.35+kr*.3+ig*.35);
+    const k=KKM[r.position]||getKkmDefault(r.position);
+    const nl=np>=k.papi&&kr>=k.kraepelin&&ig>=k.integrity&&nt>=k.total;
+    const nr={...r,scores:{...r.scores,papi:np,total:nt},lolos:nl,kkm:k,
+      details:{...r.details,papi:{...(r.details?.papi||{}),score:np,scales}}};
+    if(np!==r.scores.papi||nl!==r.lolos)recount++;
+    return nr;
+  });
+  return{updated,recount};
+}
+async function applyWeightRecompute(){
+  const {updated,recount}=computeWeightRecompute();
+  await putResults(updated);
+  return recount;
+}
+
+async function saveWeightSettings(){
+  for(const pos of DIVISIONS){
+    const posId=pos.replace(/ /g,'_');
+    for(const d of Object.keys(PAPI_DIM_MAX)){
+      const el=document.getElementById('w-'+posId+'-'+d);if(!el)continue;
+      const v=parseFloat(el.value);
+      if(el.value!==""&&(isNaN(v)||v<0||v>5)){showToast(`Bobot harus 0–5 (${pos} / ${d})`,"error");return;}
+    }
+  }
+  DIVISIONS.forEach(pos=>{PAPI_WEIGHTS[pos]=readWeightInputs(pos);});
+  try{
+    await saveConfig({papi_weights:PAPI_WEIGHTS});
+    const recount=await applyWeightRecompute();
+    showToast(recount>0?`Bobot disimpan. ${recount} kandidat dihitung ulang.`:"Bobot PAPI berhasil disimpan!","success");
+    setTimeout(()=>renderWeightSettings(),400);
+  }catch(e){showToast("Gagal menyimpan ke server","error");}
+}
+
+async function resetWeightPos(pos){
+  if(!confirm(`Reset bobot PAPI untuk posisi ${pos} ke default?`))return;
+  PAPI_WEIGHTS[pos]=getWeightDefault(pos);
+  try{await saveConfig({papi_weights:PAPI_WEIGHTS});await applyWeightRecompute();
+    showToast(`Bobot ${pos} direset ke default.`,"success");renderWeightSettings();
+  }catch(e){showToast("Gagal menyimpan ke server","error");}
+}
+
+async function resetWeights(){
+  if(!confirm("Reset SEMUA bobot PAPI ke default? Perubahan yang belum disimpan akan hilang."))return;
+  PAPI_WEIGHTS={};DIVISIONS.forEach(p=>PAPI_WEIGHTS[p]=getWeightDefault(p));
+  try{await saveConfig({papi_weights:PAPI_WEIGHTS});await applyWeightRecompute();
+    showToast("Semua bobot PAPI direset ke default.","success");renderWeightSettings();
+  }catch(e){showToast("Gagal menyimpan ke server","error");}
+}
+
+function renderTimerSettings(){
+  document.getElementById("detail-panel").className="detail-panel";
+  const sections=[
+    {key:"papi",   label:"PAPI Kostick",   icon:"🧠", desc:"90 soal forced-choice kepribadian", default:1800, minMin:10, maxMin:60},
+    {key:"kraepelin",label:"Kraepelin",    icon:"⚡", desc:"Penjumlahan angka berkelanjutan",    default:480,  minMin:3,  maxMin:30},
+    {key:"integrity",label:"Integrity Test",icon:"🛡️",desc:"50 soal pilihan ganda & likert",     default:900,  minMin:5,  maxMin:45}
+  ];
+
+  function fmtTime(s){const m=Math.floor(s/60),sec=s%60;return sec===0?`${m} menit`:`${m} menit ${sec} detik`;}
+
+  let cards="";
+  for(const sec of sections){
+    const cur=TIMER_CONFIG[sec.key];
+    const def=sec.default;
+    const curMin=Math.floor(cur/60),curSec=cur%60;
+    const defMin=Math.floor(def/60);
+    const isDiff=cur!==def;
+    cards+=`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.25rem">
+      <div style="padding:1rem 1.25rem;background:rgba(108,99,255,.06);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:1.3rem">${sec.icon}</span>
+          <div>
+            <div style="font-size:15px;font-weight:600">${sec.label}</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:1px">${sec.desc}</div>
+          </div>
+        </div>
+        ${isDiff?`<span style="font-size:10px;background:rgba(245,158,11,.15);color:var(--accent4);border:1px solid rgba(245,158,11,.3);padding:3px 10px;border-radius:100px">DIMODIFIKASI</span>`:`<span style="font-size:10px;color:var(--text3)">Default</span>`}
+      </div>
+      <div style="padding:1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1rem">
+          <div>
+            <label style="display:block;font-size:11px;color:var(--text2);font-weight:500;margin-bottom:6px">MENIT</label>
+            <input type="number" id="timer-${sec.key}-min" min="${sec.minMin}" max="${sec.maxMin}" value="${curMin}"
+              style="width:100%;padding:10px 12px;background:var(--bg3);border:1px solid ${isDiff?'var(--accent4)':'var(--border)'};border-radius:var(--radius2);color:${isDiff?'var(--accent4)':'var(--text)'};font-family:var(--mono);font-size:1.4rem;font-weight:600;outline:none;text-align:center"
+              oninput="previewTimer('${sec.key}')" onfocus="this.style.borderColor='var(--accent)'" onblur="previewTimer('${sec.key}')">
+            <div style="font-size:10px;color:var(--text3);margin-top:4px;text-align:center">${sec.minMin}–${sec.maxMin} menit</div>
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;color:var(--text2);font-weight:500;margin-bottom:6px">DETIK</label>
+            <input type="number" id="timer-${sec.key}-sec" min="0" max="59" value="${curSec}"
+              style="width:100%;padding:10px 12px;background:var(--bg3);border:1px solid ${isDiff?'var(--accent4)':'var(--border)'};border-radius:var(--radius2);color:${isDiff?'var(--accent4)':'var(--text)'};font-family:var(--mono);font-size:1.4rem;font-weight:600;outline:none;text-align:center"
+              oninput="previewTimer('${sec.key}')" onfocus="this.style.borderColor='var(--accent)'" onblur="previewTimer('${sec.key}')">
+            <div style="font-size:10px;color:var(--text3);margin-top:4px;text-align:center">0–59 detik</div>
+          </div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:11px;color:var(--text3);margin-bottom:2px">Durasi aktif</div>
+            <div id="preview-timer-${sec.key}" style="font-size:14px;font-weight:600;color:var(--accent2)">${fmtTime(cur)}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--text3);margin-bottom:2px">Default</div>
+            <div style="font-size:13px;color:var(--text2)">${fmtTime(def)}</div>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <input type="range" id="slider-${sec.key}" min="${sec.minMin*60}" max="${sec.maxMin*60}" step="30" value="${cur}"
+            style="width:100%"
+            oninput="syncSlider('${sec.key}',this.value)">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:2px">
+            <span>${sec.minMin} menit</span><span>${Math.round(sec.maxMin/2)} menit</span><span>${sec.maxMin} menit</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById("hr-main-content").innerHTML=
+    `<div class="hr-topbar">
+      <div>
+        <h1 class="hr-title">Pengaturan Timer Tes</h1>
+        <p style="font-size:13px;color:var(--text2);margin-top:2px">Atur durasi waktu untuk setiap bagian tes psikotes.</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" onclick="resetTimer()">↺ Reset ke Default</button>
+        <button class="btn btn-primary" onclick="saveTimerSettings()">Terapkan & Simpan →</button>
+      </div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:12px 16px;margin-bottom:1.25rem;font-size:12px;color:var(--text2);line-height:1.7">
+      <strong style="color:var(--text)">Catatan:</strong> Perubahan timer hanya berlaku untuk <em>sesi tes baru</em>. Tes yang sedang berjalan tidak terpengaruh. Jika waktu habis sebelum kandidat selesai, sistem otomatis melanjutkan ke bagian berikutnya.
+    </div>
+    ${cards}
+    <div style="display:flex;gap:8px;margin-top:.5rem">
+      <button class="btn btn-ghost btn-sm" onclick="resetTimer()">↺ Reset ke Default</button>
+      <button class="btn btn-primary" onclick="saveTimerSettings()">Terapkan & Simpan →</button>
+    </div>`;}
+
+function previewTimer(key){
+  const minEl=document.getElementById('timer-'+key+'-min');
+  const secEl=document.getElementById('timer-'+key+'-sec');
+  if(!minEl||!secEl)return;
+  const m=Math.max(0,parseInt(minEl.value)||0);
+  const s=Math.max(0,Math.min(59,parseInt(secEl.value)||0));
+  const total=m*60+s;
+  const prev=document.getElementById('preview-timer-'+key);
+  if(prev)prev.textContent=total>0?(s===0?`${m} menit`:`${m} menit ${s} detik`):'0 detik';
+  const slider=document.getElementById('slider-'+key);
+  if(slider)slider.value=total;
+  const isDiff=total!==(TIMER_DEFAULT[key]);
+  [minEl,secEl].forEach(el=>{
+    el.style.borderColor=isDiff?'var(--accent4)':'var(--border)';
+    el.style.color=isDiff?'var(--accent4)':'var(--text)';
+  });}
+
+function syncSlider(key,val){
+  const total=parseInt(val);
+  const m=Math.floor(total/60),s=total%60;
+  const minEl=document.getElementById('timer-'+key+'-min');
+  const secEl=document.getElementById('timer-'+key+'-sec');
+  if(minEl)minEl.value=m;
+  if(secEl)secEl.value=s;
+  previewTimer(key);}
+
+async function saveTimerSettings(){
+  const keys=['papi','kraepelin','integrity'];
+  for(const key of keys){
+    const m=parseInt(document.getElementById('timer-'+key+'-min')?.value)||0;
+    const s=parseInt(document.getElementById('timer-'+key+'-sec')?.value)||0;
+    const total=m*60+s;
+    if(total<30){showToast(`Timer ${key} minimal 30 detik`,"error");return;}
+    TIMER_CONFIG[key]=total;
+  }
+  try{await saveConfig({timer:TIMER_CONFIG});
+    showToast("Pengaturan timer berhasil disimpan!","success");
+    setTimeout(()=>renderTimerSettings(),400);
+  }catch(e){showToast("Gagal menyimpan ke server","error");}}
+
+async function resetTimer(){
+  if(!confirm("Reset semua timer ke nilai default?"))return;
+  TIMER_CONFIG={...TIMER_DEFAULT};
+  try{await saveConfig({timer:TIMER_CONFIG});showToast("Timer direset ke default.","success");renderTimerSettings();}
+  catch(e){showToast("Gagal menyimpan ke server","error");}}
+
+function hrExportAll(){
+  const b=new Blob([JSON.stringify(getResults(),null,2)],{type:"application/json"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(b);a.download="psikotes-semua-"+Date.now()+".json";a.click();showToast("Data berhasil diexport!");}
+function exportJSON(id){
+  const r=getResults().find(x=>x.id===id);if(!r)return;
+  const b=new Blob([JSON.stringify(r,null,2)],{type:"application/json"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(b);a.download="kandidat-"+id+".json";a.click();}
+
+function exportPDF(id){
+  const r=getResults().find(x=>x.id===id);if(!r)return;
+  const ins=r.insights||[],iS=r.details?.integ?.sectionScores||{},kD=r.details?.kraep||{},pS=r.details?.papi?.scales||{},kkm=r.kkm||KKM[r.position]||{};
+  const topD=Object.entries(pS).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Hasil Psikotes — '+r.name+'</title><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Segoe UI,Arial,sans-serif;font-size:13px;color:#1a1a2e;padding:32px;line-height:1.6;}.hdr{border-bottom:3px solid #6c63ff;padding-bottom:16px;margin-bottom:24px;}.logo{font-size:18px;font-weight:700;color:#6c63ff;margin-bottom:4px;}h1{font-size:22px;font-weight:700;margin-bottom:4px;}.meta{font-size:12px;color:#666;}.sec{margin-bottom:24px;}.sec-title{font-size:13px;font-weight:700;color:#6c63ff;border-bottom:1px solid #e0e0f0;padding-bottom:6px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em;}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}.info{background:#f8f8ff;border:1px solid #e0e0f0;border-radius:6px;padding:8px 12px;}.info-lbl{font-size:10px;color:#888;text-transform:uppercase;margin-bottom:2px;}.info-v{font-size:14px;font-weight:600;}.res-box{padding:16px;border-radius:8px;text-align:center;margin-bottom:20px;}.res-l{background:#f0fff4;border:2px solid #22c55e;}.res-t{background:#fff0f0;border:2px solid #ef4444;}.res-txt{font-size:20px;font-weight:800;margin-bottom:4px;}table{width:100%;border-collapse:collapse;}th{background:#f0f0ff;padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#666;border:1px solid #e0e0f0;}td{padding:8px 12px;border:1px solid #e0e0f0;font-size:13px;}.pass{color:#16a34a;font-weight:700;}.fail{color:#dc2626;font-weight:700;}.ic{background:#f8f8ff;border-left:3px solid #6c63ff;padding:10px 14px;margin-bottom:10px;border-radius:0 6px 6px 0;}.it{font-size:12px;font-weight:700;color:#6c63ff;margin-bottom:4px;}.ib{font-size:12px;color:#444;line-height:1.7;}.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}.di{background:#f8f8ff;border:1px solid #e0e0f0;border-radius:4px;padding:6px 8px;}.dn{font-size:10px;color:#888;margin-bottom:2px;}.dv{font-size:12px;font-weight:600;}.footer{margin-top:32px;padding-top:12px;border-top:1px solid #e0e0f0;font-size:11px;color:#aaa;text-align:center;}</style></head><body>'+
+  '<div class="hdr"><div class="logo">Portal Psikotes Digital</div><h1>Laporan Hasil Asesmen Kandidat</h1><div class="meta">Dicetak: '+new Date().toLocaleString("id-ID")+' · ID: '+r.id+'</div></div>'+
+  '<div class="sec"><div class="sec-title">Data Kandidat</div><div class="grid2"><div class="info"><div class="info-lbl">Nama Lengkap</div><div class="info-v">'+r.name+'</div></div><div class="info"><div class="info-lbl">Posisi Dilamar</div><div class="info-v">'+r.position+'</div></div><div class="info"><div class="info-lbl">Email</div><div class="info-v">'+r.email+'</div></div><div class="info"><div class="info-lbl">No. HP/WA</div><div class="info-v">'+r.phone+'</div></div><div class="info"><div class="info-lbl">Waktu Mulai</div><div class="info-v">'+new Date(r.startTime).toLocaleString("id-ID")+'</div></div><div class="info"><div class="info-lbl">Waktu Selesai</div><div class="info-v">'+(r.finishTime?new Date(r.finishTime).toLocaleString("id-ID"):"-")+'</div></div></div></div>'+
+  '<div class="res-box '+(r.lolos?"res-l":"res-t")+'"><div class="res-txt" style="color:'+(r.lolos?"#16a34a":"#dc2626")+'">'+(r.lolos?"✓ LOLOS KKM":"✗ TIDAK LOLOS KKM")+'</div><div style="font-size:13px;color:#666">Skor Total: '+r.scores?.total+'/100 · KKM Minimum: '+kkm.total+'</div></div>'+
+  '<div class="sec"><div class="sec-title">Rekap Skor vs KKM</div><table><thead><tr><th>Komponen</th><th>Skor</th><th>KKM</th><th>Status</th></tr></thead><tbody><tr><td>PAPI Kostick (Kepribadian)</td><td><b>'+r.scores?.papi+'</b>/100</td><td>'+kkm.papi+'</td><td class="'+(r.scores?.papi>=kkm.papi?"pass":"fail")+'">'+(r.scores?.papi>=kkm.papi?"✓ Lolos":"✗ Tidak Lolos")+'</td></tr><tr><td>Kraepelin (Ketelitian & Kecepatan)</td><td><b>'+r.scores?.kraepelin+'</b>/100</td><td>'+kkm.kraepelin+'</td><td class="'+(r.scores?.kraepelin>=kkm.kraepelin?"pass":"fail")+'">'+(r.scores?.kraepelin>=kkm.kraepelin?"✓ Lolos":"✗ Tidak Lolos")+'</td></tr><tr><td>Integrity Test (Integritas)</td><td><b>'+r.scores?.integrity+'</b>/100</td><td>'+kkm.integrity+'</td><td class="'+(r.scores?.integrity>=kkm.integrity?"pass":"fail")+'">'+(r.scores?.integrity>=kkm.integrity?"✓ Lolos":"✗ Tidak Lolos")+'</td></tr><tr style="background:#f0f0ff"><td><b>TOTAL</b></td><td><b>'+r.scores?.total+'</b>/100</td><td>'+kkm.total+'</td><td class="'+(r.scores?.total>=kkm.total?"pass":"fail")+'"><b>'+(r.scores?.total>=kkm.total?"✓ Lolos":"✗ Tidak Lolos")+'</b></td></tr></tbody></table></div>'+
+  (kD.total>0?'<div class="sec"><div class="sec-title">Detail Kraepelin</div><div class="grid2"><div class="info"><div class="info-lbl">Soal Dikerjakan</div><div class="info-v">'+kD.total+'</div></div><div class="info"><div class="info-lbl">Jawaban Benar</div><div class="info-v" style="color:#16a34a">'+kD.correct+'</div></div><div class="info"><div class="info-lbl">Akurasi</div><div class="info-v" style="color:#d97706">'+kD.accuracy+'%</div></div><div class="info"><div class="info-lbl">Kecepatan</div><div class="info-v">'+(kD.total>80?"Tinggi":kD.total>50?"Sedang":"Rendah")+'</div></div></div></div>':'')+
+  (Object.keys(iS).length>0?'<div class="sec"><div class="sec-title">Skor Integrity per Bagian</div><table><thead><tr><th>Bagian</th><th>Aspek</th><th>Skor</th></tr></thead><tbody><tr><td>A</td><td>Sikap terhadap kejujuran & kecurangan</td><td>'+(iS.A||0)+'/100</td></tr><tr><td>B</td><td>Pengakuan perilaku masa lalu</td><td>'+(iS.B||0)+'/100</td></tr><tr><td>C</td><td>Etos kerja & tanggung jawab</td><td>'+(iS.C||0)+'/100</td></tr><tr><td>D</td><td>Toleransi pelanggaran norma</td><td>'+(iS.D||0)+'/100</td></tr><tr><td>E</td><td>Skenario etika kerja nyata</td><td>'+(iS.E||0)+'/100</td></tr></tbody></table></div>':'')+
+  (topD.length>0?'<div class="sec"><div class="sec-title">Dimensi PAPI Dominan</div><div class="dg">'+topD.map(([k,v])=>'<div class="di"><div class="dn">'+(PAPI_DIM_LABELS[k]||k)+'</div><div class="dv">'+v+' respons</div></div>').join("")+'</div></div>':'')+
+  '<div class="sec"><div class="sec-title">Interpretasi & Rekomendasi HR</div>'+ins.map(i=>'<div class="ic"><div class="it">'+i.title+'</div><div class="ib">'+i.text+'</div></div>').join("")+'</div>'+
+  '<div class="footer">Laporan dibuat oleh Portal Psikotes Digital · Bersifat rahasia, hanya untuk keperluan internal rekrutmen · '+r.id+'</div>'+
+  '<script>window.onload=()=>window.print()<\/script></body></html>';
+  const w=window.open("","_blank");w.document.write(html);w.document.close();}
+
+// ============================================================
+// INISIALISASI — muat konfigurasi dari database online
+// ============================================================
+(async function bootstrap(){
+  try{
+    await loadConfig();
+    populateDivisionDropdown();
+  }catch(e){
+    // Gagal terhubung ke server (mis. belum deploy / DB belum siap)
+    ensureDivisionData();
+    populateDivisionDropdown();
+    showToast("Tidak dapat terhubung ke server data. Memakai pengaturan default sementara.","error");
+  }
+  // Jika token HR masih valid di sesi ini, biarkan; data dimuat ulang saat membuka dashboard.
+})();
+</script>
+</body>
+</html>

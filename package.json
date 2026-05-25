@@ -1,0 +1,10 @@
+{
+  "name": "portal-psikotes",
+  "version": "2.0.0",
+  "description": "Portal Psikotes Digital — data terpusat di Netlify DB (Neon Postgres)",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@netlify/neon": "^0.1.2"
+  }
+}
